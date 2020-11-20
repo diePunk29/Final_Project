@@ -10,12 +10,27 @@ public class Main extends JFrame {
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
 
-        // file and about menus
+        // file and about menus components
         JMenu fileMenu = new JMenu("File");
         JMenu aboutMenu = new JMenu("About");
 
         mainBar.add(fileMenu);
         mainBar.add(aboutMenu);
+
+        // JMenu items for File menu component
+        JMenuItem loadRost = new JMenuItem("Load a Roster");
+        JMenuItem addAttdce = new JMenuItem("Add Attendance");
+        JMenuItem save = new JMenuItem("Save");
+        JMenuItem plotData = new JMenuItem("Plot Data");
+
+        // adding menu items to file menu
+        fileMenu.add(loadRost);
+        fileMenu.add(addAttdce);
+        fileMenu.add(save);
+        fileMenu.add(plotData);
+
+
+
 
 
     }
