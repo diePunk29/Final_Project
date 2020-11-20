@@ -17,15 +17,20 @@ public class Main extends JFrame {
         mainBar.add(fileMenu);
         mainBar.add(aboutMenu);
 
+        JOptionPane dia = new JOptionPane();
+        dia.setMessage(" TEAM NAME: DA AMAZING FELLAS!\n" +
+                " TEAM MEMBERS: Cristian Mosqueda, Albert Schaeffer, I forgot the rest lol.\n");
+        aboutMenu.add(dia);
+
         // JMenu items for File menu component
         JMenuItem loadRost = new JMenuItem("Load a Roster");
-        JMenuItem addAttdce = new JMenuItem("Add Attendance");
+        JMenuItem addAttendance = new JMenuItem("Add Attendance");
         JMenuItem save = new JMenuItem("Save");
         JMenuItem plotData = new JMenuItem("Plot Data");
 
         // adding menu items to file menu
         fileMenu.add(loadRost);
-        fileMenu.add(addAttdce);
+        fileMenu.add(addAttendance);
         fileMenu.add(save);
         fileMenu.add(plotData);
 
