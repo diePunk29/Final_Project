@@ -19,7 +19,8 @@ public class Main extends JFrame {
 
         JOptionPane dia = new JOptionPane();
         dia.setMessage(" TEAM NAME: DA AMAZING FELLAS!\n" +
-                " TEAM MEMBERS: Cristian Mosqueda, Albert Schaeffer, I forgot the rest lol.\n");
+                " TEAM MEMBERS: Cristian Mosqueda, Albert Schaeffer, Tyler Vaillancourt," +
+                "Will Lord, I forgot the rest lol.\n");
         aboutMenu.add(dia);
 
         // JMenu items for File menu component
