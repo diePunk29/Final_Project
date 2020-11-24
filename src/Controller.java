@@ -63,23 +63,23 @@ public class Controller implements ActionListener {
 
             if(selection == JFileChooser.APPROVE_OPTION) {
                 csvFile = chooser.getSelectedFile();
+                if (csvFile.getName().endsWith(".txt")) {
+                    try {
+                        fileInput = new Scanner(csvFile);
 
-                try {
-                    fileInput = new Scanner(csvFile);
-
-                    // if the file is a file
-                    if(csvFile.isFile()) {
-                        // setting up comma as the file delimiter
-                        fileInput.useDelimiter(",");
-                        // traversing the csv file
-                        while(fileInput.hasNext()) {
-                            System.out.println(fileInput.next());
+                        // if the file is a file
+                        if (csvFile.isFile()) {
+                            // setting up comma as the file delimiter
+                            fileInput.useDelimiter(",");
+                            // traversing the csv file
+                            while (fileInput.hasNext()) {
+                                System.out.println(fileInput.next());
+                            }
+                            fileInput.close();
                         }
-                        fileInput.close();
+                    } catch (FileNotFoundException error) {
+                        error.printStackTrace();
                     }
-                }
-                catch (FileNotFoundException error) {
-                    error.printStackTrace();
                 }
             }
         }
