@@ -13,7 +13,7 @@ public class Main extends JFrame {
         JOptionPane aboutInfo = new JOptionPane();
         aboutInfo.setMessage(JOptionPane.PLAIN_MESSAGE);
         aboutInfo.setMessage("TEAM NAME: DA AMAZING FELLAS\n" +
-                "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaeffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n");
+                "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n");
 
         co.aboutMenu.add(aboutInfo);
 
