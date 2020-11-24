@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,12 +50,38 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadRost) {
             System.out.println("Load");
+
+            // declarations
             File csvFile;
-            Scanner fileIn;
-            int response = 0;
+            Scanner fileInput;
+            int selection = 0;
+
+            // starts within project folder!
             JFileChooser chooser = new JFileChooser(".");
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            response = chooser.showOpenDialog(null);
+            selection = chooser.showOpenDialog(null);
+
+            if(selection == JFileChooser.APPROVE_OPTION) {
+                csvFile = chooser.getSelectedFile();
+
+                try {
+                    fileInput = new Scanner(csvFile);
+
+                    // if the file is a file
+                    if(csvFile.isFile()) {
+                        // setting up comma as the file delimiter
+                        fileInput.useDelimiter(",");
+                        // traversing the csv file
+                        while(fileInput.hasNext()) {
+                            System.out.println(fileInput.next());
+                        }
+                        fileInput.close();
+                    }
+                }
+                catch (FileNotFoundException error) {
+                    error.printStackTrace();
+                }
+            }
         }
         else if (e.getSource() == addAttendance) {
             System.out.println("Add");
