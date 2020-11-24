@@ -41,7 +41,17 @@ public class Controller implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
+        if (e.getSource() == loadRost) {
+            System.out.println("Load");
+        }
+        else if (e.getSource() == addAttendance) {
+            System.out.println("Add");
+        }
+        else if (e.getSource() == save) {
+            System.out.println("Save");
+        }
+        else if (e.getSource() == plotData) {
+            System.out.println("Plot");
+        }
     }
 }
