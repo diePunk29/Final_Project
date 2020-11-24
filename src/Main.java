@@ -10,6 +10,13 @@ public class Main extends JFrame {
         setJMenuBar(mainBar);
         Controller co = new Controller();
 
+        JOptionPane aboutInfo = new JOptionPane();
+        aboutInfo.setMessage(JOptionPane.PLAIN_MESSAGE);
+        aboutInfo.setMessage("TEAM NAME: DA AMAZING FELLAS\n" +
+                "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaeffer\nTyler Vaillancourt\nWill Lord\n&....\n");
+        co.aboutMenu.add(aboutInfo);
+
+
         mainBar.add(co.fileMenu);
         mainBar.add(co.aboutMenu);
     }
