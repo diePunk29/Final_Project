@@ -14,7 +14,8 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    ArrayList<StudentInfo> studentEntries;
+    private StudentInfo studentI;
+    protected ArrayList<StudentInfo> studentEntries;
 
     // constructor + methods
     public Controller() {
@@ -59,6 +60,7 @@ public class Controller implements ActionListener {
             JFileChooser chooser = new JFileChooser(".");
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             selection = chooser.showOpenDialog(null);
+            studentEntries = new ArrayList<>();
 
             if(selection == JFileChooser.APPROVE_OPTION) {
                 csvFile = chooser.getSelectedFile();
@@ -74,13 +76,31 @@ public class Controller implements ActionListener {
                             String[] dataColumns = new String[6];
                             while ((tempData = bufR.readLine()) != null) {
                                 dataColumns = tempData.split(delimiter);
+                                // setting up student info
+                                // we still need to add checks for data field type
+                                studentI = new StudentInfo();
+                                studentI.setStudentId(dataColumns[0]);
+                                studentI.setFirstName(dataColumns[1]);
+                                studentI.setLastName(dataColumns[2]);
+                                studentI.setProgPlan(dataColumns[3]);
+                                studentI.setAcademicLvl(dataColumns[4]);
+                                studentI.setAsurite(dataColumns[5]);
+
+                                // push finalized student info into arraylist of all student entries
+                                studentEntries.add(studentI);
                             }
-                            for(String data: dataColumns) {
-                                System.out.println(data + " ");
-                            }
-                            System.out.println();
                             bufR.close();
 
+                            System.out.println("*** STUDENT ENTRIES TABLE ***");
+                            // printing student entries to make sure it works correctly
+                            for(int i = 0; i < studentEntries.size(); i++) {
+                                System.out.println("ID: " + studentEntries.get(i).getStudentId());
+                                System.out.println("FIRST NAME: " + studentEntries.get(i).getFirstName());
+                                System.out.println("LAST NAME: " + studentEntries.get(i).getLastName());
+                                System.out.println("PROGRAM/PLAN: " + studentEntries.get(i).getProgPlan());
+                                System.out.println("ACADEMIC LEVEL: " + studentEntries.get(i).getAcademicLvl());
+                                System.out.println("ASURITE: " + studentEntries.get(i).getAsurite() + "\n");
+                            }
                         }
                     } catch (FileNotFoundException error) {
                         error.printStackTrace();

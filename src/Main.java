@@ -24,6 +24,7 @@ public class Main extends JFrame {
 
     }
 
+
     public static void main(String[] args) {
         Main daMain = new Main();
         daMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
