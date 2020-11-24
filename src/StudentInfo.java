@@ -1,3 +1,6 @@
+// class used for arrayList type
+// the data fields in CSV file will be copied into an instance of StudentInfo
+// and will be pushed in the ArrayList studentEntries
 public class StudentInfo {
     // fields
     private long studentId;
