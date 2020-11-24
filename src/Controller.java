@@ -38,6 +38,12 @@ public class Controller implements ActionListener {
         fileMenu.add(addAttendance);
         fileMenu.add(save);
         fileMenu.add(plotData);
+
+        // action listeners
+        loadRost.addActionListener(this);
+        addAttendance.addActionListener(this);
+        save.addActionListener(this);
+        plotData.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -53,5 +59,6 @@ public class Controller implements ActionListener {
         else if (e.getSource() == plotData) {
             System.out.println("Plot");
         }
+
     }
 }
