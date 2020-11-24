@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 // class used for arrayList type
 // the data fields in CSV file will be copied into an instance of StudentInfo
 // and will be pushed in the ArrayList studentEntries
 public class StudentInfo {
     // fields
-    private long studentId;
+    private String studentId;
     private String firstName;
     private String lastName;
     private String progPlan;
@@ -11,7 +13,7 @@ public class StudentInfo {
     private String asurite;
 
     // constructor
-    public StudentInfo(long studentId, String firstName, String lastName, String progPlan, String academicLvl, String asurite) {
+    public StudentInfo(String studentId, String firstName, String lastName, String progPlan, String academicLvl, String asurite) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,4 +21,6 @@ public class StudentInfo {
         this.academicLvl = academicLvl;
         this.asurite = asurite;
     }
+
+
 }

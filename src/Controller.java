@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Controller implements ActionListener {
@@ -52,9 +50,10 @@ public class Controller implements ActionListener {
             System.out.println("Load");
 
             // declarations
+            BufferedReader bufR;
             File csvFile;
-            Scanner fileInput;
-            int selection = 0;
+            FileReader fReadr;
+            int selection;
 
             // starts within project folder!
             JFileChooser chooser = new JFileChooser(".");
@@ -65,23 +64,32 @@ public class Controller implements ActionListener {
                 csvFile = chooser.getSelectedFile();
                 if (csvFile.getName().endsWith(".txt")) {
                     try {
-                        fileInput = new Scanner(csvFile);
+                        fReadr = new FileReader(csvFile);
+                        bufR = new BufferedReader(fReadr);
 
                         // if the file is a file
                         if (csvFile.isFile()) {
-                            // setting up comma as the file delimiter
-                            fileInput.useDelimiter(",");
-                            // traversing the csv file
-                            while (fileInput.hasNext()) {
-                                System.out.println(fileInput.next());
+                            final String delimiter = ",";
+                            String tempData;
+                            String[] dataColumns = new String[6];
+                            while ((tempData = bufR.readLine()) != null) {
+                                dataColumns = tempData.split(delimiter);
                             }
-                            fileInput.close();
+                            for(String data: dataColumns) {
+                                System.out.println(data + " ");
+                            }
+                            System.out.println();
+                            bufR.close();
+
                         }
                     } catch (FileNotFoundException error) {
                         error.printStackTrace();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
                     }
                 }
             }
+
         }
         else if (e.getSource() == addAttendance) {
             System.out.println("Add");
