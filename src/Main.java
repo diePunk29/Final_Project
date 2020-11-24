@@ -47,6 +47,6 @@ public class Main extends JFrame {
         daMain.setVisible(true);
         daMain.setSize(800, 600);
 
-
+        Table table = new Table();
     }
 }

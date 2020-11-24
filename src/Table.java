@@ -1,5 +1,11 @@
 import javax.swing.*;
 
+/*
+so i was thinking that we end up moving the code from here to wherever the table is supposed
+to be. i'm gonna get the dynamic table working.
+    - the obama guy
+ */
+
 public class Table {
     // the code below is from https://www.javatpoint.com/java-jtable
     // dynamically updating table: https://stackoverflow.com/questions/24918884/dynamically-updating-jtable
