@@ -13,7 +13,9 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    final String delimiter = ",";
     private StudentInfo studentI;
+    private AttedanceInfo studentAttInfo;
     protected ArrayList<StudentInfo> studentEntries;
 
     // constructor + methods
@@ -68,7 +70,6 @@ public class Controller implements ActionListener {
 
                         // if the file is a file
                         if (csvFile.isFile()) {
-                            final String delimiter = ",";
                             String tempData;
                             String[] dataColumns = new String[6];
                             while ((tempData = bufR.readLine()) != null) {
@@ -109,7 +110,37 @@ public class Controller implements ActionListener {
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             choice = chooser.showOpenDialog(null);
 
+            if(choice == JFileChooser.APPROVE_OPTION) {
+                csvFile = chooser.getSelectedFile();
+                // making sure only .txt files are read
+                if(csvFile.getName().endsWith(".txt")) {
+                    try {
+                        fR = new FileReader(csvFile);
+                        buff = new BufferedReader(fR);
 
+                        if(csvFile.isFile()) {
+                            String currCol;
+                            String[] dataCol = new String[2];
+                            while((currCol = buff.readLine()) != null) {
+                                dataCol = currCol.split(delimiter);
+
+                                studentAttInfo = new AttedanceInfo();
+                                studentAttInfo.setAsurite(dataCol[0]);
+                                studentAttInfo.setTimeElapsed(Integer.parseInt(dataCol[1]));
+
+                                // need to add calendar here
+
+                            }
+                        }
+
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
+                }
+            }
 
         }
         else if (e.getSource() == save) {
