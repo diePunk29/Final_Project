@@ -99,6 +99,17 @@ public class Controller implements ActionListener {
 
         }
         else if (e.getSource() == addAttendance) {
+            // declarations
+            BufferedReader buff;
+            File csvFile;
+            FileReader fR;
+            int choice;
+
+            JFileChooser chooser = new JFileChooser(".");
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            choice = chooser.showOpenDialog(null);
+
+
 
         }
         else if (e.getSource() == save) {
