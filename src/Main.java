@@ -3,11 +3,11 @@ import java.awt.*;
 
 public class Main extends JFrame {
 
-    JFrame frame;
+    //JFrame frame;
 
     public Main() {
         // I think the main menu is suppose to be set up here idk tho
-        frame = new JFrame();
+        //frame = new JFrame();
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
@@ -38,10 +38,10 @@ public class Main extends JFrame {
         panel.add(scroll);
 
         //Add panel to the frame
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setSize(800, 600);
+        add(panel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        setSize(800, 600);
     }
 
 
