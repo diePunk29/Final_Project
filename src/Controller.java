@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-
 public class Controller implements ActionListener {
 
     // fields
@@ -48,8 +47,6 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadRost) {
-            System.out.println("Load");
-
             // declarations
             BufferedReader bufR;
             File csvFile;
@@ -91,16 +88,6 @@ public class Controller implements ActionListener {
                             }
                             bufR.close();
 
-                            System.out.println("*** STUDENT ENTRIES TABLE ***");
-                            // printing student entries to make sure it works correctly
-                            for(int i = 0; i < studentEntries.size(); i++) {
-                                System.out.println("ID: " + studentEntries.get(i).getStudentId());
-                                System.out.println("FIRST NAME: " + studentEntries.get(i).getFirstName());
-                                System.out.println("LAST NAME: " + studentEntries.get(i).getLastName());
-                                System.out.println("PROGRAM/PLAN: " + studentEntries.get(i).getProgPlan());
-                                System.out.println("ACADEMIC LEVEL: " + studentEntries.get(i).getAcademicLvl());
-                                System.out.println("ASURITE: " + studentEntries.get(i).getAsurite() + "\n");
-                            }
                         }
                     } catch (FileNotFoundException error) {
                         error.printStackTrace();
@@ -112,7 +99,7 @@ public class Controller implements ActionListener {
 
         }
         else if (e.getSource() == addAttendance) {
-            System.out.println("Add");
+
         }
         else if (e.getSource() == save) {
             System.out.println("Save");
