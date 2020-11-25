@@ -1,9 +1,10 @@
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main extends JFrame {
-
-    //JFrame frame;
 
     public Main() {
         // I think the main menu is suppose to be set up here idk tho
@@ -23,12 +24,8 @@ public class Main extends JFrame {
         mainBar.add(co.fileMenu);
         mainBar.add(co.aboutMenu);
 
-        //Table creation (right now it's static)
-        String[] column = {"ID", "First Name", "Last Name",
-                                "Program", "Level", "ASURITE"};
-        String[][] data = {{"1000000000", "Barack", "Obama", "Political Science", "Graduate", "bobama"}};
-
-        JTable table = new JTable(data, column);
+        //Table creation (attempting to dymanic)
+        JTable table = new JTable(new TableModel());
         table.setBounds(30, 40, 200, 300);
         JScrollPane scroll = new JScrollPane(table);
 
@@ -44,6 +41,58 @@ public class Main extends JFrame {
         setSize(800, 600);
     }
 
+    //This is for the dynamically updating JTable
+    class TableModel extends AbstractTableModel {
+
+        private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
+
+        //ArrayList for storing entries in the table (can be changed if needed)
+        private ArrayList<ArrayList> rows;
+
+        public TableModel() {
+            rows = new ArrayList<>(10);
+        }
+
+        /*
+        //this was for a test but it broke the program
+        public TableModel() {
+            ArrayList<String> temp = new ArrayList<>();
+            temp.add("100000000");
+            temp.add("barack");
+            temp.add("obama");
+            temp.add("political science");
+            temp.add("graduate");
+            temp.add("bobama");
+            rows.add(temp);
+        }
+        */
+
+        //So I'm unsure if I need more methods for the table, we might need
+        //one for grabbing the shit from the CSV or Repository class
+        @Override
+        public int getRowCount() {
+            return columnNames.length;
+        }
+
+        @Override
+        public int getColumnCount() {
+            return rows.size();
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            ArrayList column = rows.get(rowIndex);
+            return column.get(rowIndex);
+        }
+
+        public void updateTable(String[] row) {
+            ArrayList<String> col = new ArrayList<>(row.length);
+            col.addAll(Arrays.asList(row));
+            rows.add(col);
+            fireTableRowsInserted(rows.size() - 1, rows.size() - 1);
+        }
+
+    }
 
     public static void main(String[] args) {
         //Main daMain = new Main();
