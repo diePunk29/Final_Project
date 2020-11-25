@@ -25,6 +25,16 @@ public class Main extends JFrame {
         mainBar.add(co.aboutMenu);
 
         //Table creation (attempting to dymanic)
+        /*
+        //this is static table
+        String[] columns = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
+        String[][] data = {
+            {"1000000000", "barack", "obama", "political science", "graduate", "bobama"}
+        };
+
+        JTable table = new Jtable(columns, data);
+         */
+
         JTable table = new JTable(new TableModel());
         table.setBounds(30, 40, 200, 300);
         JScrollPane scroll = new JScrollPane(table);
