@@ -8,6 +8,7 @@ import javax.swing.text.DateFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -20,10 +21,8 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    JDatePanelImpl datePanel;
-    JDatePickerImpl datePicker;
-    UtilDateModel mod;
-    Properties p;
+    // format for date appearance
+    private JFormattedTextField dateTxtField;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttedanceInfo> attedanceEntries;
@@ -55,7 +54,6 @@ public class Controller implements ActionListener {
         addAttendance.addActionListener(this);
         save.addActionListener(this);
         plotData.addActionListener(this);
-
 
     }
     @Override
@@ -140,14 +138,8 @@ public class Controller implements ActionListener {
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
 
-                                mod = new UtilDateModel();
-                                p = new Properties();
-                                p.put("text.today", "Today");
-                                p.put("text.month", "Month");
-                                p.put("text.year", "Year");
 
-                                datePanel = new JDatePanelImpl(mod, p);
-                                datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+
 
 
 

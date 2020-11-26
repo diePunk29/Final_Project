@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,6 +24,8 @@ public class Main extends JFrame {
 
         mainBar.add(co.fileMenu);
         mainBar.add(co.aboutMenu);
+        setTitle("FINAL PROJECT CSE 360 <3");
+
 
 
 
