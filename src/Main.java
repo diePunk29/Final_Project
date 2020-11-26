@@ -8,7 +8,6 @@ public class Main extends JFrame {
 
     public Main() {
         // I think the main menu is suppose to be set up here idk tho
-        //frame = new JFrame();
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
@@ -23,6 +22,8 @@ public class Main extends JFrame {
 
         mainBar.add(co.fileMenu);
         mainBar.add(co.aboutMenu);
+
+
 
         //Table creation (attempting to dymanic)
         /*

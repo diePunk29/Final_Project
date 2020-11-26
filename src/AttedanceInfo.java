@@ -1,7 +1,7 @@
 public class AttedanceInfo {
     // fields
     private String asurite;
-    private int timeElapsed;
+    private String timeElapsed;
     private String date;
 
     public String getAsurite() {
@@ -12,11 +12,11 @@ public class AttedanceInfo {
         this.asurite = asurite;
     }
 
-    public int getTimeElapsed() {
+    public String getTimeElapsed() {
         return timeElapsed;
     }
 
-    public void setTimeElapsed(int timeElapsed) {
+    public void setTimeElapsed(String timeElapsed) {
         this.timeElapsed = timeElapsed;
     }
 

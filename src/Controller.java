@@ -1,8 +1,15 @@
+import org.jdatepicker.JDatePanel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.*;
+import javax.swing.text.DateFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Controller implements ActionListener {
 
@@ -13,10 +20,13 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    final String delimiter = ",";
-    private StudentInfo studentI;
-    private AttedanceInfo studentAttInfo;
+    JDatePanelImpl datePanel;
+    JDatePickerImpl datePicker;
+    UtilDateModel mod;
+    Properties p;
+    private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
+    protected ArrayList<AttedanceInfo> attedanceEntries;
 
     // constructor + methods
     public Controller() {
@@ -45,6 +55,8 @@ public class Controller implements ActionListener {
         addAttendance.addActionListener(this);
         save.addActionListener(this);
         plotData.addActionListener(this);
+
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -76,7 +88,7 @@ public class Controller implements ActionListener {
                                 dataColumns = tempData.split(delimiter);
                                 // setting up student info
                                 // we still need to add checks for data field type
-                                studentI = new StudentInfo();
+                                StudentInfo studentI = new StudentInfo();
                                 studentI.setStudentId(dataColumns[0]);
                                 studentI.setFirstName(dataColumns[1]);
                                 studentI.setLastName(dataColumns[2]);
@@ -109,6 +121,7 @@ public class Controller implements ActionListener {
             JFileChooser chooser = new JFileChooser(".");
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             choice = chooser.showOpenDialog(null);
+            attedanceEntries = new ArrayList<>();
 
             if(choice == JFileChooser.APPROVE_OPTION) {
                 csvFile = chooser.getSelectedFile();
@@ -123,12 +136,21 @@ public class Controller implements ActionListener {
                             String[] dataCol = new String[2];
                             while((currCol = buff.readLine()) != null) {
                                 dataCol = currCol.split(delimiter);
-
-                                studentAttInfo = new AttedanceInfo();
+                                AttedanceInfo studentAttInfo = new AttedanceInfo();
                                 studentAttInfo.setAsurite(dataCol[0]);
-                                studentAttInfo.setTimeElapsed(Integer.parseInt(dataCol[1]));
+                                studentAttInfo.setTimeElapsed(dataCol[1]);
 
-                                // need to add calendar here
+                                mod = new UtilDateModel();
+                                p = new Properties();
+                                p.put("text.today", "Today");
+                                p.put("text.month", "Month");
+                                p.put("text.year", "Year");
+
+                                datePanel = new JDatePanelImpl(mod, p);
+                                datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+
+
+
 
                             }
                         }
