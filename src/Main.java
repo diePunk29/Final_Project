@@ -17,7 +17,7 @@ public class Main extends JFrame {
         setJMenuBar(mainBar);
         TableModel tableModel = new TableModel();
         JTable table = new JTable(tableModel);
-        Controller co = new Controller(tableModel, getContentPane());
+        Controller co = new Controller(tableModel);
 
         String message = "TEAM NAME: DA AMAZING FELLAS\n" +
                 "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n";
@@ -116,6 +116,8 @@ public class Main extends JFrame {
         //daMain.setSize(800, 600);
 
         Main daMain = new Main();
+
+
 
         //This makes graph show up if you want to test
         /*

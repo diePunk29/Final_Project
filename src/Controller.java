@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -21,6 +22,7 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    private AttedanceInfo studentAttInfo;
     private DatePicker dp;
     private String attendDate = null ;
     private final String delimiter = ",";
@@ -28,7 +30,7 @@ public class Controller implements ActionListener {
     protected ArrayList<AttedanceInfo> attendanceEntries;
 
     // constructor + methods
-    public Controller(Main.TableModel tableModel, Container contentPane) {
+    public Controller(Main.TableModel tableModel) {
 
         // menus in menu bar
         fileMenu = new JMenu("File");
@@ -59,6 +61,7 @@ public class Controller implements ActionListener {
 
         // controller needs access to the table model
         this.tableModel = tableModel;
+        dp.addDateChangeListener(this::dateChanged);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -145,7 +148,7 @@ public class Controller implements ActionListener {
                             String[] dataCol = new String[2];
                             while((currCol = buff.readLine()) != null) {
                                 dataCol = currCol.split(delimiter);
-                                AttedanceInfo studentAttInfo = new AttedanceInfo();
+                                studentAttInfo = new AttedanceInfo();
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
 
@@ -155,19 +158,15 @@ public class Controller implements ActionListener {
                                 cal.setLayout(new FlowLayout());
                                 cal.setVisible(true);
 
-                                cal.setSize(200,100);
+                                cal.setSize(300,100);
                                 DatePickerSettings datePickerSettings = new DatePickerSettings();
                                 datePickerSettings.setAllowEmptyDates(false);
                                 dp = new DatePicker(datePickerSettings);
                                 cal.add(dp);
 
-                                dp.addDateChangeListener(new DateChangeListener() {
-                                    @Override
-                                    public void dateChanged(DateChangeEvent event) {
-                                        attendDate = dp.getDate().toString();
-                                        System.out.println(attendDate);
-                                    }
-                                });
+                                studentAttInfo.setDate(attendDate);
+                                attendanceEntries.add(studentAttInfo);
+
 
 
                             }
@@ -235,4 +234,8 @@ public class Controller implements ActionListener {
         }
 
     }
-}
+
+
+public void dateChanged(DateChangeEvent event) {
+        attendDate = dp.getDate().toString();
+}}
