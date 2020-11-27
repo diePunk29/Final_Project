@@ -1,14 +1,9 @@
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
-import javax.swing.text.DateFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class Controller implements ActionListener {
 
@@ -20,10 +15,6 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    JDatePanelImpl datePanel;
-    JDatePickerImpl datePicker;
-    UtilDateModel mod;
-    Properties p;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttedanceInfo> attendanceEntries;
