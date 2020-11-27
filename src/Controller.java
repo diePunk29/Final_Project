@@ -1,4 +1,3 @@
-import org.jdatepicker.JDatePanel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -8,27 +7,29 @@ import javax.swing.text.DateFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
 public class Controller implements ActionListener {
 
     // fields
+    Main.TableModel tableModel;
     JMenu fileMenu;
     JMenu aboutMenu;
     JMenuItem loadRost;
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    // format for date appearance
-    private JFormattedTextField dateTxtField;
+    JDatePanelImpl datePanel;
+    JDatePickerImpl datePicker;
+    UtilDateModel mod;
+    Properties p;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
-    protected ArrayList<AttedanceInfo> attedanceEntries;
+    protected ArrayList<AttedanceInfo> attendanceEntries;
 
     // constructor + methods
-    public Controller() {
+    public Controller(Main.TableModel tableModel) {
 
         // menus in menu bar
         fileMenu = new JMenu("File");
@@ -55,6 +56,8 @@ public class Controller implements ActionListener {
         save.addActionListener(this);
         plotData.addActionListener(this);
 
+        // controller needs access to the table model
+        this.tableModel = tableModel;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -96,6 +99,14 @@ public class Controller implements ActionListener {
 
                                 // push finalized student info into arraylist of all student entries
                                 studentEntries.add(studentI);
+
+                                // put the student into a String[] so types work for table
+                                String[] temp = new String[dataColumns.length];
+                                for (int i = 0; i < dataColumns.length; i++) {
+                                    temp[i] = dataColumns[i];
+                                }
+                                // update table with info from the String[]
+                                tableModel.updateTable(temp);
                             }
                             bufR.close();
 
@@ -107,7 +118,6 @@ public class Controller implements ActionListener {
                     }
                 }
             }
-
         }
         else if (e.getSource() == addAttendance) {
             // declarations
@@ -119,7 +129,7 @@ public class Controller implements ActionListener {
             JFileChooser chooser = new JFileChooser(".");
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             choice = chooser.showOpenDialog(null);
-            attedanceEntries = new ArrayList<>();
+            attendanceEntries = new ArrayList<>();
 
             if(choice == JFileChooser.APPROVE_OPTION) {
                 csvFile = chooser.getSelectedFile();
@@ -138,8 +148,14 @@ public class Controller implements ActionListener {
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
 
+                                mod = new UtilDateModel();
+                                p = new Properties();
+                                p.put("text.today", "Today");
+                                p.put("text.month", "Month");
+                                p.put("text.year", "Year");
 
-
+                                datePanel = new JDatePanelImpl(mod, p);
+                                datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
 
 
 
