@@ -148,14 +148,7 @@ public class Controller implements ActionListener {
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
 
-                                mod = new UtilDateModel();
-                                p = new Properties();
-                                p.put("text.today", "Today");
-                                p.put("text.month", "Month");
-                                p.put("text.year", "Year");
 
-                                datePanel = new JDatePanelImpl(mod, p);
-                                datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
 
 
 
