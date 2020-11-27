@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -186,6 +185,53 @@ public class Controller implements ActionListener {
         }
         else if (e.getSource() == save) {
             System.out.println("Save");
+
+            //Declarations
+            BufferedReader bufR;
+            File csvFile;
+            FileReader fReadr;
+            int selection;
+
+            JFileChooser chooser = new JFileChooser(".");
+            chooser.addChoosableFileFilter(new TextFileFilter());
+            chooser.showSaveDialog(null);
+
+            String path = chooser.getSelectedFile().getAbsolutePath();
+            String filename = chooser.getSelectedFile().getName();
+            selection = chooser.showOpenDialog(null);
+
+            if (selection == JFileChooser.APPROVE_OPTION) {
+                try {
+                    FileWriter csvOut = new FileWriter(new File(path, filename));
+
+                    for (int i = 0; i < studentEntries.size(); i++) {
+                        csvOut.write(studentEntries.get(i).getStudentId() + ",");
+                        csvOut.write(studentEntries.get(i).getFirstName() + ",");
+                        csvOut.write(studentEntries.get(i).getLastName() + ",");
+                        csvOut.write(studentEntries.get(i).getProgPlan() + ",");
+                        csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
+                        csvOut.write(studentEntries.get(i).getAsurite() + "\n");
+                    }
+
+                    if (filename.endsWith(".txt") == false) {
+                        filename = filename + ".txt";
+                    }
+
+                    csvOut.close();
+                    System.out.println("File saved successfully");
+
+                    /*
+                    if (csvOut.createNewFile()) {
+                        System.out.println("New file created: " + filename);
+                    }
+                    else {
+                        System.out.println("File already exists");
+                    }
+                     */
+                } catch (IOException error) {
+                    System.out.println("Failed to save");
+                }
+            }
         }
         else if (e.getSource() == plotData) {
             System.out.println("Plot");
