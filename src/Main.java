@@ -113,6 +113,17 @@ public class Main extends JFrame {
 
         Main daMain = new Main();
 
+        //This makes graph show up if you want to test
+        /*
+        SwingUtilities.invokeLater(() -> {
+            ScatterPlot example = new ScatterPlot("Scatter Chart Example");
+            example.setSize(800, 400);
+            example.setLocationRelativeTo(null);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
+        });
+        */
+
         //Table table = new Table();
     }
 }
