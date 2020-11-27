@@ -1,11 +1,15 @@
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -18,8 +22,8 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
-    DatePicker dp;
-    Container cp;
+    private DatePicker dp;
+    private String attendDate = null ;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttedanceInfo> attendanceEntries;
@@ -27,7 +31,6 @@ public class Controller implements ActionListener {
     // constructor + methods
     public Controller(Main.TableModel tableModel, Container contentPane) {
 
-        cp = contentPane;
         // menus in menu bar
         fileMenu = new JMenu("File");
         aboutMenu = new JMenu("About");
@@ -149,15 +152,23 @@ public class Controller implements ActionListener {
 
                                 // calendar frame
                                 JFrame cal = new JFrame();
-                                cal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                                cal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                 cal.setLayout(new FlowLayout());
                                 cal.setVisible(true);
 
-                                cal.setSize(200,200);
-                                dp = new DatePicker();
+                                cal.setSize(200,100);
+                                DatePickerSettings datePickerSettings = new DatePickerSettings();
+                                datePickerSettings.setAllowEmptyDates(false);
+                                dp = new DatePicker(datePickerSettings);
                                 cal.add(dp);
 
-
+                                dp.addDateChangeListener(new DateChangeListener() {
+                                    @Override
+                                    public void dateChanged(DateChangeEvent event) {
+                                        attendDate = dp.getDate().toString();
+                                        System.out.println(attendDate);
+                                    }
+                                });
 
 
                             }
