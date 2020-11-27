@@ -1,0 +1,8 @@
+List of Requirements:
+- Data entries must be stored in a CSV file, and must be loaded when the "Load" button is pressed
+- The data entries that are loaded must be copied to some data structure
+- Data structure must have ID, FirstName, LastName, Program+Plan, AcademicLevel, ASURITE fields
+- Entries must populate a JTable dynamically
+- We must be able to scroll through the table horizontally and vertically using JScrollPane
+- We must be able to plot the data in a graph
+- When adding new people to the roster, we must have the option to add a file path

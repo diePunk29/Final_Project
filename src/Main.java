@@ -11,7 +11,9 @@ public class Main extends JFrame {
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
-        Controller co = new Controller();
+        TableModel tableModel = new TableModel();
+        JTable table = new JTable(tableModel);
+        Controller co = new Controller(tableModel);
 
         JOptionPane aboutInfo = new JOptionPane();
         aboutInfo.setMessage(JOptionPane.PLAIN_MESSAGE);
@@ -23,20 +25,6 @@ public class Main extends JFrame {
         mainBar.add(co.fileMenu);
         mainBar.add(co.aboutMenu);
 
-
-
-        //Table creation (attempting to dymanic)
-        /*
-        //this is static table
-        String[] columns = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
-        String[][] data = {
-            {"1000000000", "barack", "obama", "political science", "graduate", "bobama"}
-        };
-
-        JTable table = new Jtable(columns, data);
-         */
-
-        JTable table = new JTable(new TableModel());
         table.setBounds(30, 40, 200, 300);
         JScrollPane scroll = new JScrollPane(table);
 
@@ -61,39 +49,42 @@ public class Main extends JFrame {
         private ArrayList<ArrayList> rows;
 
         public TableModel() {
-            rows = new ArrayList<>(10);
+            rows = new ArrayList<ArrayList>();
+            // these were for testing
+            //makeDummyRows();
+            //makeDummyRows();
+        };
+        public void makeDummyRows() {
+            ArrayList<String> tempRow = new ArrayList<String>();
+            tempRow.add("bleh");
+            tempRow.add("Obama");
+            tempRow.add("Tyler Vanillacourt");
+            tempRow.add("killME.txt");
+            tempRow.add("mamba");
+            tempRow.add("NFDL");
+            rows.add(tempRow);
         }
-
-        /*
-        //this was for a test but it broke the program
-        public TableModel() {
-            ArrayList<String> temp = new ArrayList<>();
-            temp.add("100000000");
-            temp.add("barack");
-            temp.add("obama");
-            temp.add("political science");
-            temp.add("graduate");
-            temp.add("bobama");
-            rows.add(temp);
-        }
-        */
-
         //So I'm unsure if I need more methods for the table, we might need
         //one for grabbing the shit from the CSV or Repository class
         @Override
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+        @Override
         public int getRowCount() {
-            return columnNames.length;
+            return rows.size();
         }
 
         @Override
         public int getColumnCount() {
-            return rows.size();
+            return columnNames.length;
         }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             ArrayList column = rows.get(rowIndex);
-            return column.get(rowIndex);
+            return column.get(columnIndex);
         }
 
         public void updateTable(String[] row) {
