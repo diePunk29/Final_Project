@@ -1,3 +1,5 @@
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -15,7 +17,7 @@ public class Main extends JFrame {
         setJMenuBar(mainBar);
         TableModel tableModel = new TableModel();
         JTable table = new JTable(tableModel);
-        Controller co = new Controller(tableModel);
+        Controller co = new Controller(tableModel, getContentPane());
 
         String message = "TEAM NAME: DA AMAZING FELLAS\n" +
                 "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n";
@@ -45,6 +47,7 @@ public class Main extends JFrame {
 
         //Add panel to the frame
         add(panel);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(800, 600);

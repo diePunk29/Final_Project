@@ -1,5 +1,8 @@
 
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -15,16 +18,21 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    DatePicker dp;
+    Container cp;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttedanceInfo> attendanceEntries;
 
     // constructor + methods
-    public Controller(Main.TableModel tableModel) {
+    public Controller(Main.TableModel tableModel, Container contentPane) {
 
+        cp = contentPane;
         // menus in menu bar
         fileMenu = new JMenu("File");
         aboutMenu = new JMenu("About");
+
+        dp = new DatePicker();
 
         // JMenu items for File menu component
         loadRost = new JMenuItem("Load a Roster");
@@ -139,7 +147,15 @@ public class Controller implements ActionListener {
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
 
+                                // calendar frame
+                                JFrame cal = new JFrame();
+                                cal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                                cal.setLayout(new FlowLayout());
+                                cal.setVisible(true);
 
+                                cal.setSize(200,200);
+                                dp = new DatePicker();
+                                cal.add(dp);
 
 
 
