@@ -196,38 +196,35 @@ public class Controller implements ActionListener {
             chooser.addChoosableFileFilter(new TextFileFilter());
             chooser.showSaveDialog(null);
 
-            String path = chooser.getSelectedFile().getAbsolutePath();
-            String filename = chooser.getSelectedFile().getName();
             selection = chooser.showOpenDialog(null);
 
             if (selection == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                String filename = file.getName();
+                String path = file.getParent();
+
                 try {
-                    FileWriter csvOut = new FileWriter(new File(path, filename));
+                    if (!file.exists()) {
+                        file.createNewFile();
+                        FileWriter csvOut = new FileWriter(file);
 
-                    for (int i = 0; i < studentEntries.size(); i++) {
-                        csvOut.write(studentEntries.get(i).getStudentId() + ",");
-                        csvOut.write(studentEntries.get(i).getFirstName() + ",");
-                        csvOut.write(studentEntries.get(i).getLastName() + ",");
-                        csvOut.write(studentEntries.get(i).getProgPlan() + ",");
-                        csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
-                        csvOut.write(studentEntries.get(i).getAsurite() + "\n");
-                    }
+                        for (int i = 0; i < studentEntries.size(); i++) {
+                            csvOut.write(studentEntries.get(i).getStudentId() + ",");
+                            csvOut.write(studentEntries.get(i).getFirstName() + ",");
+                            csvOut.write(studentEntries.get(i).getLastName() + ",");
+                            csvOut.write(studentEntries.get(i).getProgPlan() + ",");
+                            csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
+                            csvOut.write(studentEntries.get(i).getAsurite() + "\n");
+                        }
 
-                    if (filename.endsWith(".txt") == false) {
-                        filename = filename + ".txt";
-                    }
-
-                    csvOut.close();
-                    System.out.println("File saved successfully");
-
-                    /*
-                    if (csvOut.createNewFile()) {
-                        System.out.println("New file created: " + filename);
+                        csvOut.close();
+                        System.out.println("File saved successfully");
                     }
                     else {
-                        System.out.println("File already exists");
+                        String message = "File: " + filename + " already exists";
+                        String title = "Warning!";
+                        JOptionPane.showConfirmDialog(null, message, title, JOptionPane.DEFAULT_OPTION);
                     }
-                     */
                 } catch (IOException error) {
                     System.out.println("Failed to save");
                 }
