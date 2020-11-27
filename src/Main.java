@@ -17,10 +17,16 @@ public class Main extends JFrame {
         JTable table = new JTable(tableModel);
         Controller co = new Controller(tableModel);
 
-        JOptionPane aboutInfo = new JOptionPane();
-        aboutInfo.setMessage(JOptionPane.PLAIN_MESSAGE);
-        aboutInfo.setMessage("TEAM NAME: DA AMAZING FELLAS\n" +
-                "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n");
+        String message = "TEAM NAME: DA AMAZING FELLAS\n" +
+                "TEAM MEMBERS: \nCristian Mosqueda\nAlbert Schaffer\nTyler Vaillancourt\nWill Lord\nEric Fahy\n";
+        
+        JOptionPane aboutInfo = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[] {}, null);
+        
+        JDialog test = new JDialog();
+        test.setTitle("ABOUT");
+        test.setModal(true);
+        
+        test.setContentPane(aboutInfo);
 
         co.aboutMenu.add(aboutInfo);
 
