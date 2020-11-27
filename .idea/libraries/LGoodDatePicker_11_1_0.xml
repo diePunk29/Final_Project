@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="LGoodDatePicker-11.1.0-executable-demo1">
+  <library name="LGoodDatePicker-11.1.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/LGoodDatePicker-11.1.0-executable-demo.jar!/" />
       <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/LGoodDatePicker-11.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/LGoodDatePicker-11.1.0-executable-demo.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/LGoodDatePicker-11.1.0-javadoc.jar!/" />
