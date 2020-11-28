@@ -52,7 +52,7 @@ public class Main extends JFrame {
     //This is for the dynamically updating JTable
     class TableModel extends AbstractTableModel {
 
-        private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE", "Time"};
+        private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
 
         //ArrayList for storing entries in the table (can be changed if needed)
         private ArrayList<ArrayList> rows;
