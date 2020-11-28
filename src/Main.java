@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class Main extends JFrame {
 
     public Main() {
+
         // I think the main menu is suppose to be set up here idk tho
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();

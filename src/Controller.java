@@ -142,7 +142,7 @@ public class Controller implements ActionListener {
             datePickerSettings.setAllowEmptyDates(false);
             dp = new DatePicker(datePickerSettings);
             cal.add(dp);
-            JButton lilB = new JButton("EXIT");
+            JButton lilB = new JButton("SAVE");
 
             lilB.setLayout(new FlowLayout());
             cal.add(lilB);
