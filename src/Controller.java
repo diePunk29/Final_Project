@@ -176,7 +176,7 @@ public class Controller implements ActionListener {
                                     String[] dataCol = new String[2];
 
                                     // adds a date column to the table
-                                    tableModel.setColumnName(dp.getDate().toString());
+                                    tableModel.setColumnName(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
 
                                     while ((currCol = buff.readLine()) != null) {
                                         dataCol = currCol.split(delimiter);
