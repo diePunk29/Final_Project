@@ -20,6 +20,7 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    private JFrame cal;
     private AttedanceInfo studentAttInfo;
     private DatePicker dp;
     private String attendDate = null ;
@@ -132,7 +133,7 @@ public class Controller implements ActionListener {
         else if (e.getSource() == addAttendance) {
 
             // calendar frame
-            JFrame cal = new JFrame();
+            cal = new JFrame();
             cal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             cal.setLayout(new FlowLayout());
             cal.setVisible(true);
@@ -141,7 +142,6 @@ public class Controller implements ActionListener {
             datePickerSettings.setAllowEmptyDates(false);
             dp = new DatePicker(datePickerSettings);
             cal.add(dp);
-
 
 
             // declarations
