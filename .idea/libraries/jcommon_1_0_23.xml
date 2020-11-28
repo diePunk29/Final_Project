@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="jcommon-1.0.23">
     <CLASSES>
-      <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/jfreechart-1.0.19/jfreechart-1.0.19/lib/jcommon-1.0.23.jar!/" />
-      <root url="jar://$USER_HOME$/OneDrive/Documents/College/Semester 5/CSE 360/homework/jfreechart-1.0.19/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jcommon-1.0.23.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jfreechart-1.0.19.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

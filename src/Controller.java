@@ -130,6 +130,20 @@ public class Controller implements ActionListener {
         }
         
         else if (e.getSource() == addAttendance) {
+
+            // calendar frame
+            JFrame cal = new JFrame();
+            cal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            cal.setLayout(new FlowLayout());
+            cal.setVisible(true);
+            cal.setSize(300,100);
+            DatePickerSettings datePickerSettings = new DatePickerSettings();
+            datePickerSettings.setAllowEmptyDates(false);
+            dp = new DatePicker(datePickerSettings);
+            cal.add(dp);
+
+
+
             // declarations
             BufferedReader buff;
             File csvFile;
@@ -152,25 +166,15 @@ public class Controller implements ActionListener {
                         if(csvFile.isFile()) {
                             String currCol;
                             String[] dataCol = new String[2];
+
+
                             while((currCol = buff.readLine()) != null) {
                                 dataCol = currCol.split(delimiter);
                                 studentAttInfo = new AttedanceInfo();
                                 studentAttInfo.setAsurite(dataCol[0]);
                                 studentAttInfo.setTimeElapsed(dataCol[1]);
-
-                                // calendar frame
-                                JFrame cal = new JFrame();
-                                cal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                cal.setLayout(new FlowLayout());
-                                cal.setVisible(true);
-
-                                cal.setSize(300,100);
-                                DatePickerSettings datePickerSettings = new DatePickerSettings();
-                                datePickerSettings.setAllowEmptyDates(false);
-                                dp = new DatePicker(datePickerSettings);
-                                cal.add(dp);
-
                                 studentAttInfo.setDate(attendDate);
+
                                 attendanceEntries.add(studentAttInfo);
 
 
@@ -186,10 +190,18 @@ public class Controller implements ActionListener {
 
                 }
             }
+            for(int i = 0; i < attendanceEntries.size(); i++) {
+                System.out.println(attendanceEntries.get(i).getAsurite());
+                System.out.println(attendanceEntries.get(i).getTimeElapsed());
+                System.out.println(attendanceEntries.get(i).getDate());
+                System.out.println();
+            }
         }
         
         else if (e.getSource() == save) {
             System.out.println("Save");
+
+
 
             //Declarations
             BufferedReader bufR;
@@ -242,5 +254,7 @@ public class Controller implements ActionListener {
 
 
 public void dateChanged(DateChangeEvent event) {
-        attendDate = dp.getDate().toString();
-}}
+        attendDate = event.getNewDate().toString();
+    }
+
+}
