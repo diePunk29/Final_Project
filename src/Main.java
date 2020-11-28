@@ -1,10 +1,6 @@
-import com.github.lgooddatepicker.components.DatePicker;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -56,7 +52,7 @@ public class Main extends JFrame {
     //This is for the dynamically updating JTable
     class TableModel extends AbstractTableModel {
 
-        private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
+        private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE", "Time"};
 
         //ArrayList for storing entries in the table (can be changed if needed)
         private ArrayList<ArrayList> rows;
