@@ -26,6 +26,7 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    private Boolean hasLoadedRost = false;
     private JFrame cal;
     private AttedanceInfo studentAttInfo;
     private DatePicker dp;
@@ -91,6 +92,7 @@ public class Controller implements ActionListener {
             studentEntries = new ArrayList<>();
 
             if (selection == JFileChooser.APPROVE_OPTION) {
+                hasLoadedRost = true;
                 csvFile = chooser.getSelectedFile();
                 if (csvFile.getName().endsWith(".txt")) {
                     try {
@@ -129,7 +131,7 @@ public class Controller implements ActionListener {
                     }
                 }
             }
-        } else if (e.getSource() == addAttendance) {
+        } else if (e.getSource() == addAttendance && hasLoadedRost) {
 
             // calendar frame
             cal = new JFrame();
@@ -198,12 +200,6 @@ public class Controller implements ActionListener {
                             }
 
                         }
-                    }
-                    for (int i = 0; i < attendanceEntries.size(); i++) {
-                        System.out.println(attendanceEntries.get(i).getAsurite());
-                        System.out.println(attendanceEntries.get(i).getTimeElapsed());
-                        System.out.println(attendanceEntries.get(i).getDate());
-                        System.out.println();
                     }
                 }
             });
