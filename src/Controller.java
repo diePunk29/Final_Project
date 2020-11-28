@@ -92,7 +92,7 @@ public class Controller implements ActionListener {
             studentEntries = new ArrayList<>();
 
             if (selection == JFileChooser.APPROVE_OPTION) {
-                hasLoadedRost = true;
+
                 csvFile = chooser.getSelectedFile();
                 if (csvFile.getName().endsWith(".txt")) {
                     try {
@@ -101,6 +101,9 @@ public class Controller implements ActionListener {
 
                         // if the file is a file
                         if (csvFile.isFile()) {
+                            // roster has been loaded
+                            hasLoadedRost = true;
+
                             String tempData;
                             String[] dataColumns = new String[6];
                             while ((tempData = bufR.readLine()) != null) {
