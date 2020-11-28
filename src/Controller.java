@@ -1,7 +1,6 @@
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -66,6 +64,13 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadRost) {
+
+            // clear table
+            studentEntries.clear();
+            while (tableModel.getRowCount() > 0) {
+                tableModel.removeRow(0);
+            }
+
             // declarations
             BufferedReader bufR;
             File csvFile;
