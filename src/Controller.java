@@ -111,13 +111,8 @@ public class Controller implements ActionListener {
                                 // push finalized student info into arraylist of all student entries
                                 studentEntries.add(studentI);
 
-                                // put the student into a String[] so types work for table
-                                String[] temp = new String[dataColumns.length];
-                                for (int i = 0; i < dataColumns.length; i++) {
-                                    temp[i] = dataColumns[i];
-                                }
-                                // update table with info from the String[]
-                                tableModel.updateTable(temp);
+                                // update the table with this student info
+                                tableModel.updateTable(studentI);
                             }
                             bufR.close();
 
@@ -175,6 +170,9 @@ public class Controller implements ActionListener {
                                     String currCol;
                                     String[] dataCol = new String[2];
 
+                                    // adds a date column to the table
+                                    tableModel.setColumnName(dp.getDate().toString());
+
                                     while ((currCol = buff.readLine()) != null) {
                                         dataCol = currCol.split(delimiter);
                                         studentAttInfo = new AttedanceInfo();
@@ -182,7 +180,10 @@ public class Controller implements ActionListener {
                                         studentAttInfo.setTimeElapsed(dataCol[1]);
                                         studentAttInfo.setDate(dp.getDate().toString());
                                         attendanceEntries.add(studentAttInfo);
+
+                                        tableModel.updateWithAttendance(studentAttInfo);
                                     }
+                                    tableModel.fireTableDataChanged();
                                 }
 
                             } catch (FileNotFoundException fileNotFoundException) {

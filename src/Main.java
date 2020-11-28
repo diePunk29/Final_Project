@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+
 public class Main extends JFrame {
 
     public Main() {
@@ -81,6 +83,18 @@ public class Main extends JFrame {
             return columnNames[col];
         }
 
+        // adds the date column to the table header
+        public void setColumnName(String date) {
+            String[] newNames = new String[columnNames.length+1];
+            for (int i = 0; i < columnNames.length; i++) newNames[i] = columnNames[i];
+            newNames[columnNames.length] = date;
+            columnNames = newNames;
+            for (int i = 0; i < rows.size(); i++) {
+                rows.get(i).add("0");
+            }
+            fireTableStructureChanged();
+        }
+
         @Override
         public int getRowCount() {
             return rows.size();
@@ -97,11 +111,34 @@ public class Main extends JFrame {
             return column.get(columnIndex);
         }
 
-        public void updateTable(String[] row) {
-            ArrayList<String> col = new ArrayList<>(row.length);
-            col.addAll(Arrays.asList(row));
+        public void updateTable(StudentInfo row) {
+            ArrayList<String> col = new ArrayList<>(7);
+            //add all student info elements to the col
+            col.add(row.getStudentId());
+            col.add(row.getFirstName());
+            col.add(row.getLastName());
+            col.add(row.getProgPlan());
+            col.add(row.getAcademicLvl());
+            col.add(row.getAsurite());
+
             rows.add(col);
             fireTableRowsInserted(rows.size() - 1, rows.size() - 1);
+        }
+
+        // adds the elapsed time to the table for a give student
+        public void updateWithAttendance(AttedanceInfo info) {
+
+            // iterates over all the rows in the table to find given student
+            for (int i = 0; i < rows.size(); i++) {
+
+                // not sure why but table has a space before the asurite
+                String tableID = rows.get(i).get(5).toString().replace(" ", "");
+
+                // if the asurite in the table matches the incoming asurite, update the value
+                if (tableID.equals(info.getAsurite())) {
+                    rows.get(i).set(6, info.getTimeElapsed());
+                }
+            }
         }
 
         public void removeRow(int row) {
