@@ -1,12 +1,19 @@
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTextUI;
+import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -98,7 +105,6 @@ public class Controller implements ActionListener {
                                 dataColumns = tempData.split(delimiter);
                                 // setting up student info
                                 // we still need to add checks for data field type
-                                /*
                                 StudentInfo studentI = new StudentInfo();
                                 studentI.setStudentId(dataColumns[0]);
                                 studentI.setFirstName(dataColumns[1]);
@@ -109,7 +115,7 @@ public class Controller implements ActionListener {
 
                                 // push finalized student info into arraylist of all student entries
                                 studentEntries.add(studentI);
-                                */
+
                                 // put the student into a String[] so types work for table
                                 String[] temp = new String[dataColumns.length];
                                 for (int i = 0; i < dataColumns.length; i++) {
@@ -179,7 +185,7 @@ public class Controller implements ActionListener {
                                         studentAttInfo = new AttedanceInfo();
                                         studentAttInfo.setAsurite(dataCol[0]);
                                         studentAttInfo.setTimeElapsed(dataCol[1]);
-                                        studentAttInfo.setDate(dp.getDate().toString());
+                                        studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
                                         attendanceEntries.add(studentAttInfo);
                                     }
                                 }
