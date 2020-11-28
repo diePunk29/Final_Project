@@ -5,10 +5,15 @@ import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTextUI;
+import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Controller implements ActionListener {
@@ -178,7 +183,7 @@ public class Controller implements ActionListener {
                                         studentAttInfo = new AttedanceInfo();
                                         studentAttInfo.setAsurite(dataCol[0]);
                                         studentAttInfo.setTimeElapsed(dataCol[1]);
-                                        studentAttInfo.setDate(dp.getDate().toString());
+                                        studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
                                         attendanceEntries.add(studentAttInfo);
 
                                         tableModel.updateWithAttendance(studentAttInfo);
