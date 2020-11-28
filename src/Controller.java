@@ -123,6 +123,7 @@ public class Controller implements ActionListener {
                 }
             }
         }
+        
         else if (e.getSource() == addAttendance) {
             // declarations
             BufferedReader buff;
@@ -180,8 +181,8 @@ public class Controller implements ActionListener {
 
                 }
             }
-
         }
+        
         else if (e.getSource() == save) {
             System.out.println("Save");
 
@@ -193,9 +194,7 @@ public class Controller implements ActionListener {
 
             JFileChooser chooser = new JFileChooser(".");
             chooser.addChoosableFileFilter(new TextFileFilter());
-            chooser.showSaveDialog(null);
-
-            selection = chooser.showOpenDialog(null);
+            selection = chooser.showSaveDialog(null);
 
             if (selection == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
@@ -229,6 +228,7 @@ public class Controller implements ActionListener {
                 }
             }
         }
+        
         else if (e.getSource() == plotData) {
             System.out.println("Plot");
         }
