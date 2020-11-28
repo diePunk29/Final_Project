@@ -103,6 +103,10 @@ public class Main extends JFrame {
             fireTableRowsInserted(rows.size() - 1, rows.size() - 1);
         }
 
+        public void removeRow(int row) {
+            rows.remove(row);
+        }
+
     }
 
     public static void main(String[] args) {
