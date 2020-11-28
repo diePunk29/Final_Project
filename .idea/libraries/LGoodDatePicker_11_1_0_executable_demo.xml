@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="LGoodDatePicker-11.1.0-executable-demo">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/LGoodDatePicker-11.1.0-executable-demo.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/LGoodDatePicker-11.1.0.jar!/" />
+      <root url="file://$PROJECT_DIR$/Project ExLibraries" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Downloads/LGoodDatePicker-11.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/LGoodDatePicker-11.1.0-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/Project ExLibraries" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/Project ExLibraries" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/Project ExLibraries" recursive="false" type="SOURCES" />
+  </library>
+</component>
