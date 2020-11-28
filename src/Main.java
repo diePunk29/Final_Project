@@ -136,15 +136,9 @@ public class Main extends JFrame {
 
                 // if the asurite in the table matches the incoming asurite, update the value
                 if (tableID.equals(info.getAsurite())) {
-                    if (rows.get(i).get(6).equals("0")) {
-                        rows.get(i).set(6, info.getTimeElapsed());
-                    }
-                    else {
-                        int newValue = Integer.parseInt(rows.get(i).get(6).toString().replace(" ", ""));
-                        newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
-                        rows.get(i).set(6, ""+newValue);
-                    }
-
+                    int newValue = Integer.parseInt(rows.get(i).get(6).toString().replace(" ", ""));
+                    newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
+                    rows.get(i).set(6, ""+newValue);
                 }
             }
         }
