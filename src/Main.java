@@ -167,7 +167,7 @@ public class Main extends JFrame {
             JFrame fj = new JFrame();
             fj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             fj.setVisible(false);
-            JOptionPane.showMessageDialog(fj, "Student with asurite: " + info.getAsurite() + " is " +
+            JOptionPane.showMessageDialog(fj, "Student with ASURITE: " + info.getAsurite() + ", is " +
                     "not present in the current roster!", "ALERT", JOptionPane.WARNING_MESSAGE);
         }
 
