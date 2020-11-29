@@ -119,6 +119,15 @@ public class Main extends JFrame {
         }
 
         public void updateTable(StudentInfo row) {
+
+            // breaks function if student is already in the table
+            String tableID;
+            for (int i = 0; i < rows.size(); i++) {
+                tableID = rows.get(i).get(5).toString().replace(" ","");
+                if (tableID.equals(row.getAsurite().replace(" ", ""))) {
+                    return;
+                }
+            }
             ArrayList<String> col = new ArrayList<>(7);
             //add all student info elements to the col
             col.add(row.getStudentId());
