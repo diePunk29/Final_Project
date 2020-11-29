@@ -85,6 +85,13 @@ public class Main extends JFrame {
 
         // adds the date column to the table header
         public void setColumnName(String date) {
+
+            // searches through array and ignores duplicate dates
+            for (int i = 0; i < columnNames.length; i++) {
+                if (date.equals(columnNames[i])) return;
+            }
+
+            // create a new array with one more capacity to be the new column names
             String[] newNames = new String[columnNames.length+1];
             for (int i = 0; i < columnNames.length; i++) newNames[i] = columnNames[i];
             newNames[columnNames.length] = date;
@@ -127,7 +134,15 @@ public class Main extends JFrame {
 
         // adds the elapsed time to the table for a give student
         public void updateWithAttendance(AttedanceInfo info) {
+            int columnIndex = 0;
 
+            // find the correct date column to be adding to
+            for (int i = 0; i < columnNames.length; i++) {
+                if (columnNames[i].equals(info.getDate())) {
+                    columnIndex = i;
+                    break;
+                }
+            }
             // iterates over all the rows in the table to find given student
             for (int i = 0; i < rows.size(); i++) {
 
@@ -136,9 +151,9 @@ public class Main extends JFrame {
 
                 // if the asurite in the table matches the incoming asurite, update the value
                 if (tableID.equals(info.getAsurite())) {
-                    int newValue = Integer.parseInt(rows.get(i).get(6).toString().replace(" ", ""));
+                    int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
-                    rows.get(i).set(6, ""+newValue);
+                    rows.get(i).set(columnIndex, ""+newValue);
                 }
             }
         }
