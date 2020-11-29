@@ -2,8 +2,6 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 
 public class Main extends JFrame {
@@ -36,7 +34,9 @@ public class Main extends JFrame {
         setTitle("FINAL PROJECT CSE 360 <3");
 
 
-        table.setBounds(30, 40, 200, 300);
+        // Figure out how to set table minimum width (horizontal)
+        //table.setBounds(30, 40, 200, 300);
+        table.setBounds(table.getBounds());
         JScrollPane scroll = new JScrollPane(table);
 
         //Add the menu bar and table to a panel
@@ -142,7 +142,7 @@ public class Main extends JFrame {
         }
 
         // adds the elapsed time to the table for a give student
-        public void updateWithAttendance(AttedanceInfo info) {
+        public void updateWithAttendance(AttendanceInfo info) {
             int columnIndex = 0;
 
             // find the correct date column to be adding to
@@ -162,7 +162,7 @@ public class Main extends JFrame {
                 if (tableID.equals(info.getAsurite())) {
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
-                    rows.get(i).set(columnIndex, ""+newValue);
+                    rows.get(i).set(columnIndex, "" + newValue);
                     return;
                 }
             }
@@ -171,8 +171,13 @@ public class Main extends JFrame {
         }
 
         // reports to the user that a student is not in the roster when adding their attendance
-        public void reportStudent(AttedanceInfo info) {
-            System.out.println(info.getAsurite()); // temporary just to show
+        public void reportStudent(AttendanceInfo info) {
+            // JFrame will act as a pop up
+            JFrame fj = new JFrame();
+            fj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            fj.setVisible(false);
+            JOptionPane.showMessageDialog(fj, "Student with ASURITE: " + info.getAsurite() + ", is " +
+                    "not present in the current roster!", "ALERT", JOptionPane.WARNING_MESSAGE);
         }
 
         public void removeRow(int row) {

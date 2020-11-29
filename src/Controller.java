@@ -1,18 +1,12 @@
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTextUI;
-import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -28,12 +22,12 @@ public class Controller implements ActionListener {
     JMenuItem plotData;
     private Boolean hasLoadedRost = false;
     private JFrame cal;
-    private AttedanceInfo studentAttInfo;
+    private AttendanceInfo studentAttInfo;
     private DatePicker dp;
     private String attendDate;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
-    protected ArrayList<AttedanceInfo> attendanceEntries;
+    protected ArrayList<AttendanceInfo> attendanceEntries;
 
     // constructor + methods
     public Controller(Main.TableModel tableModel) {
@@ -134,80 +128,88 @@ public class Controller implements ActionListener {
                     }
                 }
             }
-        } else if (e.getSource() == addAttendance && hasLoadedRost) {
+        } else if (e.getSource() == addAttendance) {
+            // if the roster has been loaded then proceed if not then..
+            if(hasLoadedRost) {
+                // calendar frame
+                cal = new JFrame();
+                cal.setUndecorated(true);
+                cal.setLocationRelativeTo(null);
+                cal.setLayout(new FlowLayout());
+                cal.setVisible(true);
+                cal.setSize(300, 100);
+                DatePickerSettings datePickerSettings = new DatePickerSettings();
+                datePickerSettings.setAllowEmptyDates(false);
+                dp = new DatePicker(datePickerSettings);
+                cal.add(dp);
+                JButton lilB = new JButton("SAVE");
 
-            // calendar frame
-            cal = new JFrame();
-            cal.setUndecorated(true);
-            cal.setLocationRelativeTo(null);
-            cal.setLayout(new FlowLayout());
-            cal.setVisible(true);
-            cal.setSize(300, 100);
-            DatePickerSettings datePickerSettings = new DatePickerSettings();
-            datePickerSettings.setAllowEmptyDates(false);
-            dp = new DatePicker(datePickerSettings);
-            cal.add(dp);
-            JButton lilB = new JButton("SAVE");
+                lilB.setLayout(new FlowLayout());
+                cal.add(lilB);
+                lilB.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // declarations
+                        BufferedReader buff;
+                        File csvFile;
+                        FileReader fR;
+                        int choice;
 
-            lilB.setLayout(new FlowLayout());
-            cal.add(lilB);
-            lilB.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // declarations
-                    BufferedReader buff;
-                    File csvFile;
-                    FileReader fR;
-                    int choice;
+                        // closes datepicker frame
+                        cal.dispose();
 
-                    // closes datepicker frame
-                    cal.dispose();
+                        JFileChooser chooser = new JFileChooser(".");
+                        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                        choice = chooser.showOpenDialog(null);
+                        attendanceEntries = new ArrayList<>();
 
-                    JFileChooser chooser = new JFileChooser(".");
-                    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                    choice = chooser.showOpenDialog(null);
-                    attendanceEntries = new ArrayList<>();
+                        if (choice == JFileChooser.APPROVE_OPTION) {
+                            csvFile = chooser.getSelectedFile();
+                            // making sure only .txt files are read
+                            if (csvFile.getName().endsWith(".txt")) {
+                                try {
+                                    fR = new FileReader(csvFile);
+                                    buff = new BufferedReader(fR);
 
-                    if (choice == JFileChooser.APPROVE_OPTION) {
-                        csvFile = chooser.getSelectedFile();
-                        // making sure only .txt files are read
-                        if (csvFile.getName().endsWith(".txt")) {
-                            try {
-                                fR = new FileReader(csvFile);
-                                buff = new BufferedReader(fR);
+                                    if (csvFile.isFile()) {
+                                        String currCol;
+                                        String[] dataCol = new String[2];
 
-                                if (csvFile.isFile()) {
-                                    String currCol;
-                                    String[] dataCol = new String[2];
+                                        // adds a date column to the table
+                                        tableModel.setColumnName(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
 
-                                    // adds a date column to the table
-                                    tableModel.setColumnName(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
+                                        while ((currCol = buff.readLine()) != null) {
+                                            dataCol = currCol.split(delimiter);
+                                            studentAttInfo = new AttendanceInfo();
+                                            studentAttInfo.setAsurite(dataCol[0]);
+                                            studentAttInfo.setTimeElapsed(dataCol[1]);
+                                            studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
+                                            attendanceEntries.add(studentAttInfo);
 
-                                    while ((currCol = buff.readLine()) != null) {
-                                        dataCol = currCol.split(delimiter);
-                                        studentAttInfo = new AttedanceInfo();
-                                        studentAttInfo.setAsurite(dataCol[0]);
-                                        studentAttInfo.setTimeElapsed(dataCol[1]);
-                                        studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
-                                        attendanceEntries.add(studentAttInfo);
-
-                                        tableModel.updateWithAttendance(studentAttInfo);
+                                            tableModel.updateWithAttendance(studentAttInfo);
+                                        }
+                                        tableModel.fireTableDataChanged();
                                     }
-                                    tableModel.fireTableDataChanged();
+
+                                } catch (FileNotFoundException fileNotFoundException) {
+                                    fileNotFoundException.printStackTrace();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
                                 }
 
-                            } catch (FileNotFoundException fileNotFoundException) {
-                                fileNotFoundException.printStackTrace();
-                            } catch (IOException ioException) {
-                                ioException.printStackTrace();
                             }
-
                         }
                     }
-                }
-            });
+                });
 
-
+            }
+            else {
+                JFrame ffj = new JFrame();
+                ffj.setVisible(false);
+                ffj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                JOptionPane.showMessageDialog(ffj, "ROSTER MUST BE LOADED FOR ATTENDANCE" +
+                        " TO BE ADDED!", "ERROR: ROSTER NOT LOADED", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == save) {
             System.out.println("Save");
 
