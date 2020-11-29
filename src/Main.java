@@ -36,7 +36,9 @@ public class Main extends JFrame {
         setTitle("FINAL PROJECT CSE 360 <3");
 
 
-        table.setBounds(30, 40, 200, 300);
+        // Figure out how to set table minimum width (horizontal)
+        //table.setBounds(30, 40, 200, 300);
+        table.setBounds(table.getBounds());
         JScrollPane scroll = new JScrollPane(table);
 
         //Add the menu bar and table to a panel
