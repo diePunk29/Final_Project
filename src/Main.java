@@ -56,9 +56,10 @@ public class Main extends JFrame {
     class TableModel extends AbstractTableModel {
 
         private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
-
         //ArrayList for storing entries in the table (can be changed if needed)
         private ArrayList<ArrayList> rows;
+        private ArrayList<AttendanceInfo> missingStuds;
+
 
         public TableModel() {
             rows = new ArrayList<ArrayList>();
@@ -85,7 +86,6 @@ public class Main extends JFrame {
 
         // adds the date column to the table header
         public void setColumnName(String date) {
-
             // searches through array and ignores duplicate dates
             for (int i = 0; i < columnNames.length; i++) {
                 if (date.equals(columnNames[i])) return;
@@ -119,6 +119,15 @@ public class Main extends JFrame {
         }
 
         public void updateTable(StudentInfo row) {
+
+            // breaks function if student is already in the table
+            String tableID;
+            for (int i = 0; i < rows.size(); i++) {
+                tableID = rows.get(i).get(5).toString().replace(" ","");
+                if (tableID.equals(row.getAsurite().replace(" ", ""))) {
+                    return;
+                }
+            }
             ArrayList<String> col = new ArrayList<>(7);
             //add all student info elements to the col
             col.add(row.getStudentId());
@@ -133,8 +142,9 @@ public class Main extends JFrame {
         }
 
         // adds the elapsed time to the table for a give student
-        public void updateWithAttendance(AttendanceInfo info) {
+        public int updateWithAttendance(AttendanceInfo info, ArrayList<AttendanceInfo> ms) {
             int columnIndex = 0;
+            int dataLoadCount = 0;
 
             // find the correct date column to be adding to
             for (int i = 0; i < columnNames.length; i++) {
@@ -151,24 +161,21 @@ public class Main extends JFrame {
 
                 // if the asurite in the table matches the incoming asurite, update the value
                 if (tableID.equals(info.getAsurite())) {
+                    dataLoadCount++;
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, "" + newValue);
-                    return;
+                    return dataLoadCount;
                 }
             }
             // if we get here the student was not in the original roster
-            reportStudent(info);
+            recordMissingStudents(info, ms);
+            return 0;
         }
 
         // reports to the user that a student is not in the roster when adding their attendance
-        public void reportStudent(AttendanceInfo info) {
-            // JFrame will act as a pop up
-            JFrame fj = new JFrame();
-            fj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            fj.setVisible(false);
-            JOptionPane.showMessageDialog(fj, "Student with ASURITE: " + info.getAsurite() + ", is " +
-                    "not present in the current roster!", "ALERT", JOptionPane.WARNING_MESSAGE);
+        public void recordMissingStudents(AttendanceInfo info, ArrayList<AttendanceInfo> ms) {
+            ms.add(info);
         }
 
         public void removeRow(int row) {
