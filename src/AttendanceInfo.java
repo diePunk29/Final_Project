@@ -1,4 +1,4 @@
-public class AttedanceInfo {
+public class AttendanceInfo {
     // fields
     private String asurite;
     private String timeElapsed;

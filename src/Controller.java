@@ -1,18 +1,12 @@
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTextUI;
-import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -28,12 +22,12 @@ public class Controller implements ActionListener {
     JMenuItem plotData;
     private Boolean hasLoadedRost = false;
     private JFrame cal;
-    private AttedanceInfo studentAttInfo;
+    private AttendanceInfo studentAttInfo;
     private DatePicker dp;
     private String attendDate;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
-    protected ArrayList<AttedanceInfo> attendanceEntries;
+    protected ArrayList<AttendanceInfo> attendanceEntries;
 
     // constructor + methods
     public Controller(Main.TableModel tableModel) {
@@ -185,7 +179,7 @@ public class Controller implements ActionListener {
 
                                     while ((currCol = buff.readLine()) != null) {
                                         dataCol = currCol.split(delimiter);
-                                        studentAttInfo = new AttedanceInfo();
+                                        studentAttInfo = new AttendanceInfo();
                                         studentAttInfo.setAsurite(dataCol[0]);
                                         studentAttInfo.setTimeElapsed(dataCol[1]);
                                         studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
