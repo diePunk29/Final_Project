@@ -10,6 +10,10 @@ import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/*
+Date picker found at: https://github.com/LGoodDatePicker/LGoodDatePicker
+ */
+
 public class Controller implements ActionListener {
 
     // fields
@@ -215,9 +219,6 @@ public class Controller implements ActionListener {
 
 
             //Declarations
-            BufferedReader bufR;
-            File csvFile;
-            FileReader fReadr;
             int selection;
 
             JFileChooser chooser = new JFileChooser(".");
