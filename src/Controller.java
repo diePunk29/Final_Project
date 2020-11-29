@@ -20,6 +20,7 @@ public class Controller implements ActionListener {
     JMenuItem addAttendance;
     JMenuItem save;
     JMenuItem plotData;
+    private int attendanceCount = 0;
     private Boolean hasLoadedRost = false;
     private JFrame cal;
     private AttendanceInfo studentAttInfo;
@@ -28,6 +29,7 @@ public class Controller implements ActionListener {
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttendanceInfo> attendanceEntries;
+    protected ArrayList<AttendanceInfo> ms;
 
     // constructor + methods
     public Controller(Main.TableModel tableModel) {
@@ -35,8 +37,8 @@ public class Controller implements ActionListener {
         // menus in menu bar
         fileMenu = new JMenu("File");
         aboutMenu = new JMenu("About");
-
         dp = new DatePicker();
+        ms = new ArrayList<>();
 
         // JMenu items for File menu component
         loadRost = new JMenuItem("Load a Roster");
@@ -162,7 +164,7 @@ public class Controller implements ActionListener {
                         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                         choice = chooser.showOpenDialog(null);
                         attendanceEntries = new ArrayList<>();
-
+                        attendanceCount = 0;
                         if (choice == JFileChooser.APPROVE_OPTION) {
                             csvFile = chooser.getSelectedFile();
                             // making sure only .txt files are read
@@ -186,7 +188,7 @@ public class Controller implements ActionListener {
                                             studentAttInfo.setDate(dp.getDate().format(DateTimeFormatter.ofPattern("MMM d")).toString());
                                             attendanceEntries.add(studentAttInfo);
 
-                                            tableModel.updateWithAttendance(studentAttInfo);
+                                            attendanceCount += tableModel.updateWithAttendance(studentAttInfo, ms);
                                         }
                                         tableModel.fireTableDataChanged();
                                     }
@@ -199,8 +201,26 @@ public class Controller implements ActionListener {
 
                             }
                         }
+                        // notifies user about additional attendees not in roster
+                        if(!ms.isEmpty()) {
+                            int countOfMs = 0;
+                            String message = "";
+                            for(int indx = 0; indx < ms.size(); indx++) {
+                                countOfMs++;
+                                message += ms.get(indx).getAsurite() + " Connected for: " + ms.get(indx).getTimeElapsed() + "\n";
+                            }
+                            // JFrame will act as a pop up
+                            JFrame fj = new JFrame();
+                            fj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            fj.setVisible(false);
+                            JOptionPane.showMessageDialog(fj, "Data Loaded for " + attendanceCount + " users in roster.\n" +
+                                            countOfMs + " additional attendee(s) found:\n" + message
+                                    , "ALERT", JOptionPane.INFORMATION_MESSAGE);
+                            ms.clear();
+                        }
                     }
                 });
+
 
             }
             else {
