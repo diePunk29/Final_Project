@@ -1,5 +1,8 @@
 import java.awt.Color;
 import javax.swing.JFrame;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -16,6 +19,7 @@ public class ScatterPlot extends JFrame {
 
     public ScatterPlot(String title)
     {
+        super(title);
 
         //Create Data Table
         XYDataset data = createDataset();
@@ -32,12 +36,16 @@ public class ScatterPlot extends JFrame {
         setContentPane(panel);
     }
 
+    /*
+    So in here, we need it to pull data from the table. I think the best way is through
+    a loop of sorts, using studentEntries and AttendanceInfo?
+     */
     private XYDataset createDataset()
     {
         XYSeriesCollection data = new XYSeriesCollection();
 
-        //X-axis data
-        XYSeries xAxisData = new XYSeries("What should this be?");
+        //Data
+        XYSeries points = new XYSeries("Attendance");
 
 
         /* Test Data
@@ -62,35 +70,9 @@ public class ScatterPlot extends JFrame {
 
         //*************
 
-        data.addSeries(xAxisData);
-
-        //Y-axis data
-        XYSeries yAxisData = new XYSeries("What should this be?");
-
-        //Test data
-        /*
-        yAxisData.add(1, 72.5);
-        yAxisData.add(2, 80.1);
-        yAxisData.add(3, 87.2);
-        yAxisData.add(4, 94.5);
-        yAxisData.add(5, 101.4);
-        yAxisData.add(6, 107.4);
-        yAxisData.add(7, 112.8);
-        yAxisData.add(8, 118.2);
-        yAxisData.add(9, 122.9);
-        yAxisData.add(10, 123.4);
-        */
-
-        //Add Real Data
-        //***************
-
-
-
-
-        //***************
-
-        data.addSeries(yAxisData);
+        data.addSeries(points);
 
         return data;
     }
+
 }

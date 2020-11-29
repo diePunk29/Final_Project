@@ -289,6 +289,9 @@ public class Controller implements ActionListener {
             }
         } else if (e.getSource() == plotData) {
             System.out.println("Plot");
+
+            ScatterPlot scatterPlot = new ScatterPlot("Attendance Chart");
+            JOptionPane.showMessageDialog(scatterPlot, "Attendance Chart");
         }
 
     }
