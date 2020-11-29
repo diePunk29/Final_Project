@@ -240,7 +240,19 @@ public class Controller implements ActionListener {
                             csvOut.write(studentEntries.get(i).getLastName() + ",");
                             csvOut.write(studentEntries.get(i).getProgPlan() + ",");
                             csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
-                            csvOut.write(studentEntries.get(i).getAsurite() + "\n");
+                            csvOut.write(studentEntries.get(i).getAsurite());
+
+                            //if there are attendance entries in the table, we need to save them
+                            //commented out because we need to update load to look for this stuff
+                            /*
+                            for (int j = 0; j < attendanceEntries.size(); j++) {
+                                if (studentEntries.get(i).getAsurite().equals(attendanceEntries.get(j).getAsurite())) {
+                                    csvOut.write("," + attendanceEntries.get(j).getDate() + ",");
+                                    csvOut.write(attendanceEntries.get(j).getTimeElapsed());
+                                }
+                            }
+                             */
+                            csvOut.write("\n");
                         }
 
                         csvOut.close();
