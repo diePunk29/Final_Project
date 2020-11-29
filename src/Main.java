@@ -156,8 +156,16 @@ public class Main extends JFrame {
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, ""+newValue);
+                    return;
                 }
             }
+            // if we get here the student was not in the original roster
+            reportStudent(info);
+        }
+
+        // reports to the user that a student is not in the roster when adding their attendance
+        public void reportStudent(AttedanceInfo info) {
+            System.out.println(info.getAsurite()); // temporary just to show
         }
 
         public void removeRow(int row) {
