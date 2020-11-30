@@ -35,9 +35,9 @@ public class Main extends JFrame {
 
 
         // Figure out how to set table minimum width (horizontal)
-        //table.setBounds(30, 40, 200, 300);
-        table.setBounds(table.getBounds());
-        JScrollPane scroll = new JScrollPane(table);
+        table.setBounds(30, 40, 200, 300);
+        //table.setBounds(table.getBounds());
+        JScrollPane scroll = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         //Add the menu bar and table to a panel
         panel.setLayout(new BorderLayout());

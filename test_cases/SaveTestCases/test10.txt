@@ -1,0 +1,5 @@
+ID,First Name,Last Name,Program,Level,ASURITE,Nov 29
+1890567823, Cris, Jones, Computer Science MCS, Graduate,lilcris56,10,50
+2672516161, Baby, Cheeks, Sociology MCS, Graduate,babyJ3
+1234098712, Little, Alberto, Scientology PHD, Graduate,lilalberto,55
+6765423415, Will, Poop, Business PHD, Graduate,lilWilly,32
