@@ -27,6 +27,7 @@ public class Controller implements ActionListener {
     JMenuItem plotData;
     private int attendanceCount = 0;
     private Boolean hasLoadedRost = false;
+    private Boolean hasLoadedAttendance = false;
     private JFrame cal;
     private AttendanceInfo studentAttInfo;
     private DatePicker dp;
@@ -178,6 +179,7 @@ public class Controller implements ActionListener {
                                     buff = new BufferedReader(fR);
 
                                     if (csvFile.isFile()) {
+                                        hasLoadedAttendance = true;
                                         String currCol;
                                         String[] dataCol = new String[2];
 
@@ -305,13 +307,21 @@ public class Controller implements ActionListener {
                 }
             }
         } else if (e.getSource() == plotData) {
-            SwingUtilities.invokeLater(() -> {
-                ScatterPlot example = new ScatterPlot("Scatter Chart Example", tableModel);
-                example.setSize(800, 400);
-                example.setLocationRelativeTo(null);
-                example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                example.setVisible(true);
-            });
+            if(hasLoadedRost && hasLoadedAttendance) {
+                SwingUtilities.invokeLater(() -> {
+                    ScatterPlot example = new ScatterPlot("Scatter Chart Example");
+                    example.setSize(800, 400);
+                    example.setLocationRelativeTo(null);
+                    example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    example.setVisible(true);
+                });
+            }
+            else {
+                JFrame fj = new JFrame();
+                fj.setVisible(false);
+                JOptionPane.showMessageDialog(fj, "ROSTER AND ATTENDANCE MUST BE LOADED\nIN ORDER TO USE " +
+                        "PLOT.", "ERROR: ROSTER AND ATTENDANCE NOT LOADED", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }

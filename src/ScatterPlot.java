@@ -15,12 +15,12 @@ public class ScatterPlot extends JFrame {
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
 
-    public ScatterPlot(String title, Main.TableModel tableModel)
+    public ScatterPlot(String title)
     {
         super(title);
 
         //Create Data Table
-        XYDataset data = createDataset(tableModel);
+        XYDataset data = createDataset();
 
         //Create Chart
         JFreeChart scatterPlot = ChartFactory.createScatterPlot(TITLE,XAXISLABEL,YAXISLABEl,data);
@@ -34,11 +34,12 @@ public class ScatterPlot extends JFrame {
         setContentPane(panel);
     }
 
+
     /*
     So in here, we need it to pull data from the table. I think the best way is through
     a loop of sorts, using studentEntries and AttendanceInfo?
      */
-    private XYDataset createDataset(Main.TableModel tableModel)
+    private XYDataset createDataset()
     {
         XYSeriesCollection data = new XYSeriesCollection();
 
