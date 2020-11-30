@@ -6,6 +6,7 @@
  */
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
@@ -26,12 +27,12 @@ public class ScatterPlot extends JFrame {
      * This is the constructor for the scatter plot that initializes what it should look like.
      * @param title The title of the scatter plot.
      */
-    public ScatterPlot(String title)
+    public ScatterPlot(String title, ArrayList<AttendanceInfo> atInfo)
     {
         super(title);
 
         //Create Data Table
-        XYDataset data = createDataset();
+        XYDataset data = createDataset(atInfo);
 
         //Create Chart
         JFreeChart scatterPlot = ChartFactory.createScatterPlot(TITLE,XAXISLABEL,YAXISLABEl,data);
@@ -54,10 +55,9 @@ public class ScatterPlot extends JFrame {
      * This pulls the data from the table in order to get it into the plot.
      * @return The dataset to be added to the plot.
      */
-    private XYDataset createDataset()
+    private XYDataset createDataset(ArrayList<AttendanceInfo> info)
     {
         XYSeriesCollection data = new XYSeriesCollection();
-
         //Data
         XYSeries points = new XYSeries("Attendance");
 

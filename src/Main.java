@@ -74,13 +74,14 @@ public class Main extends JFrame {
         private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
         //ArrayList for storing entries in the table (can be changed if needed)
         private ArrayList<ArrayList> rows;
-        private ArrayList<AttendanceInfo> missingStuds;
+        private ArrayList<AttendanceInfo> scatterData;
 
         /**
          * This is the constructor for the Table. It initializes the rows of the table.
          */
         public TableModel() {
             rows = new ArrayList<ArrayList>();
+            scatterData = new ArrayList<>();
             // these were for testing
             //makeDummyRows();
             //makeDummyRows();
@@ -157,7 +158,11 @@ public class Main extends JFrame {
             ArrayList column = rows.get(rowIndex);
             return column.get(columnIndex);
         }
-        
+
+        public ArrayList<AttendanceInfo> getScatterData() {
+            return scatterData;
+        }
+
         /**
          * This updates the table with the new row to be added.
          * @param row The row to be added.
@@ -214,6 +219,8 @@ public class Main extends JFrame {
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, "" + newValue);
+                    // data needed for scatter chart
+                    scatterData.add(info);
                     return dataLoadCount;
                 }
             }

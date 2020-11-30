@@ -183,6 +183,7 @@ public class Controller implements ActionListener {
                         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                         choice = chooser.showOpenDialog(null);
                         attendanceEntries = new ArrayList<>();
+                        ms = new ArrayList<>();
                         attendanceCount = 0;
                         if (choice == JFileChooser.APPROVE_OPTION) {
                             csvFile = chooser.getSelectedFile();
@@ -323,7 +324,8 @@ public class Controller implements ActionListener {
         } else if (e.getSource() == plotData) {
             if(hasLoadedRost && hasLoadedAttendance) {
                 SwingUtilities.invokeLater(() -> {
-                    ScatterPlot example = new ScatterPlot("Scatter Chart Example");
+                    ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
+                    ScatterPlot example = new ScatterPlot("Scatter Chart Example", temp);
                     example.setSize(800, 400);
                     example.setLocationRelativeTo(null);
                     example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
