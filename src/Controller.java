@@ -213,13 +213,13 @@ public class Controller implements ActionListener {
                             String message = "";
                             for(int indx = 0; indx < ms.size(); indx++) {
                                 countOfMs++;
-                                message += ms.get(indx).getAsurite() + " Connected for: " + ms.get(indx).getTimeElapsed() + "\n";
+                                message += ms.get(indx).getAsurite() + " Connected for: " + ms.get(indx).getTimeElapsed() + " minutes \n";
                             }
                             // JFrame will act as a pop up
                             JFrame fj = new JFrame();
                             fj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             fj.setVisible(false);
-                            JOptionPane.showMessageDialog(fj, "Data Loaded for " + attendanceCount + " users in roster.\n" +
+                            JOptionPane.showMessageDialog(fj, "Data Loaded for " + attendanceCount + " user(s) in roster.\n" +
                                             countOfMs + " additional attendee(s) found:\n" + message
                                     , "ALERT", JOptionPane.INFORMATION_MESSAGE);
                             ms.clear();
@@ -312,7 +312,7 @@ public class Controller implements ActionListener {
                     ScatterPlot example = new ScatterPlot("Scatter Chart Example");
                     example.setSize(800, 400);
                     example.setLocationRelativeTo(null);
-                    example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     example.setVisible(true);
                 });
             }
