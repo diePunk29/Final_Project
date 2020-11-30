@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -237,7 +238,6 @@ public class Controller implements ActionListener {
         } else if (e.getSource() == save) {
             System.out.println("Save");
 
-
             //Declarations
             int selection;
 
@@ -248,32 +248,46 @@ public class Controller implements ActionListener {
             if (selection == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
                 String filename = file.getName();
-                String path = file.getParent();
+                //String path = file.getParent();
 
                 try {
                     if (!file.exists()) {
                         file.createNewFile();
                         FileWriter csvOut = new FileWriter(file);
 
-                        for (int i = 0; i < studentEntries.size(); i++) {
-                            csvOut.write(studentEntries.get(i).getStudentId() + ",");
-                            csvOut.write(studentEntries.get(i).getFirstName() + ",");
-                            csvOut.write(studentEntries.get(i).getLastName() + ",");
-                            csvOut.write(studentEntries.get(i).getProgPlan() + ",");
-                            csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
-                            csvOut.write(studentEntries.get(i).getAsurite());
+                        //write table headers
+                        for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                            csvOut.write(tableModel.getColumnName(i));
+                            if (i != tableModel.getColumnCount() - 1)
+                                csvOut.write(",");
+                        }
+                        csvOut.write("\n");
 
-                            //if there are attendance entries in the table, we need to save them
-                            //commented out because we need to update load to look for this stuff
-                            /*
-                            for (int j = 0; j < attendanceEntries.size(); j++) {
-                                if (studentEntries.get(i).getAsurite().equals(attendanceEntries.get(j).getAsurite())) {
-                                    csvOut.write("," + attendanceEntries.get(j).getDate() + ",");
-                                    csvOut.write(attendanceEntries.get(j).getTimeElapsed());
+                        //write student info
+                        for (int i = 0; i < studentEntries.size(); i++) {
+                            boolean duplicateStudent = isDuplicateStudent(studentEntries.get(i).getStudentId(), i);
+
+                            if (duplicateStudent == false) {
+                                csvOut.write(studentEntries.get(i).getStudentId().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getFirstName().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getLastName().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getProgPlan().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getAcademicLvl().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getAsurite().replace(" ", ""));
+
+                                //if there are attendance entries in the table, we need to save them
+                                for (int j = 0; j < attendanceEntries.size(); j++) {
+                                    System.out.println(studentEntries.get(i).getAsurite() + " " + attendanceEntries.get(j).getAsurite());
+                                    System.out.println(attendanceEntries.get(j).getTimeElapsed());
+                                    if (studentEntries.get(i).getAsurite().equals(attendanceEntries.get(j).getAsurite())) {
+                                        csvOut.write("," + attendanceEntries.get(j).getTimeElapsed().replace(" ", ""));
+                                    }
                                 }
                             }
-                             */
-                            csvOut.write("\n");
+
+                            //new line if not the last entry in the table
+                            if (i != studentEntries.size() - 1)
+                                csvOut.write("\n");
                         }
 
                         csvOut.close();
@@ -294,5 +308,17 @@ public class Controller implements ActionListener {
             JOptionPane.showMessageDialog(scatterPlot, "Attendance Chart");
         }
 
+    }
+
+    // Helper method to determine if a student is duplicate
+    // Used for save
+    public boolean isDuplicateStudent(String id, int index) {
+        for (int i = 0; i < index; i++) {
+            if (id.equals(studentEntries.get(i).getStudentId())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
