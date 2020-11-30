@@ -1,14 +1,21 @@
+/**
+ * CSE360
+ * Final Project
+ * This class is made to get file extensions
+ * Based off code from:
+ * https://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemo2Project/src/components/Utils.java
+ */
+
 import java.io.File;
 
-/*
-This class is made to get file extensions
-Based off code from:
-https://docs.oracle.com/javase/tutorial/uiswing/examples/components/FileChooserDemo2Project/src/components/Utils.java
- */
 public class TextFileFilterUtil {
     public final static String txt = "txt";
 
-    // This method gets the file extension for file saving
+    /**
+     * This gets the file extension for file saving.
+     * @param f the file to be checked.
+     * @return the file extension.
+     */
     public static String getExtension(File f) {
         String extension = null;
         String filename = f.getName();

@@ -1,3 +1,9 @@
+/**
+ * CSE360
+ * Final Project
+ * This class is the controller that deals
+ * with the file menu.
+ */
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
@@ -7,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -36,7 +41,11 @@ public class Controller implements ActionListener {
     protected ArrayList<AttendanceInfo> attendanceEntries;
     protected ArrayList<AttendanceInfo> ms;
 
-    // constructor + methods
+    /**
+     * This is the constructor for the Controller class.
+     * It also creates the look of the frame.
+     * @param tableModel The table model being used
+     */
     public Controller(Main.TableModel tableModel) {
 
         // menus in menu bar
@@ -71,6 +80,11 @@ public class Controller implements ActionListener {
     }
 
     @Override
+    /**
+     * This method handles all of the events that handles on the main frame.
+     * It will activate everything that needs to happen when a button or option is selected.
+     * @param e  The event that occured
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadRost) {
 
@@ -326,8 +340,13 @@ public class Controller implements ActionListener {
 
     }
 
-    // Helper method to determine if a student is duplicate
-    // Used for save
+    /**
+     * This is a helper method to determine if a student is a duplicate.
+     * It is used for save.
+     * @param id The id to check.
+     * @param index The max index to check.
+     * @return
+     */
     public boolean isDuplicateStudent(String id, int index) {
         for (int i = 0; i < index; i++) {
             if (id.equals(studentEntries.get(i).getStudentId())) {
