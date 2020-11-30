@@ -268,11 +268,11 @@ public class Controller implements ActionListener {
                             boolean duplicateStudent = isDuplicateStudent(studentEntries.get(i).getStudentId(), i);
 
                             if (duplicateStudent == false) {
-                                csvOut.write(studentEntries.get(i).getStudentId().replace(" ", "") + ",");
-                                csvOut.write(studentEntries.get(i).getFirstName().replace(" ", "") + ",");
-                                csvOut.write(studentEntries.get(i).getLastName().replace(" ", "") + ",");
-                                csvOut.write(studentEntries.get(i).getProgPlan().replace(" ", "") + ",");
-                                csvOut.write(studentEntries.get(i).getAcademicLvl().replace(" ", "") + ",");
+                                csvOut.write(studentEntries.get(i).getStudentId() + ",");
+                                csvOut.write(studentEntries.get(i).getFirstName() + ",");
+                                csvOut.write(studentEntries.get(i).getLastName() + ",");
+                                csvOut.write(studentEntries.get(i).getProgPlan() + ",");
+                                csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
                                 csvOut.write(studentEntries.get(i).getAsurite().replace(" ", ""));
 
                                 //if there are attendance entries in the table, we need to save them
