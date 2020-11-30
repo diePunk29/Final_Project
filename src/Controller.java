@@ -275,11 +275,15 @@ public class Controller implements ActionListener {
                                 csvOut.write(studentEntries.get(i).getAcademicLvl() + ",");
                                 csvOut.write(studentEntries.get(i).getAsurite().replace(" ", ""));
 
+                                // used in the for loop below
+                                String studentEntry, attendanceEntry;
+
                                 //if there are attendance entries in the table, we need to save them
                                 for (int j = 0; j < attendanceEntries.size(); j++) {
-                                    System.out.println(studentEntries.get(i).getAsurite() + " " + attendanceEntries.get(j).getAsurite());
-                                    System.out.println(attendanceEntries.get(j).getTimeElapsed());
-                                    if (studentEntries.get(i).getAsurite().equals(attendanceEntries.get(j).getAsurite())) {
+                                    studentEntry = studentEntries.get(i).getAsurite().replace(" ", "");
+                                    attendanceEntry = attendanceEntries.get(j).getAsurite().replace(" ", "");
+
+                                    if (studentEntry.equals(attendanceEntry)) {
                                         csvOut.write("," + attendanceEntries.get(j).getTimeElapsed().replace(" ", ""));
                                     }
                                 }

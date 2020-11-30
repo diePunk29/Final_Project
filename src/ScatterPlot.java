@@ -1,8 +1,6 @@
 import java.awt.Color;
 import javax.swing.JFrame;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
