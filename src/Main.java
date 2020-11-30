@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 public class Main extends JFrame {
+    private TableModel tableModel;
 
     public Main() {
 
@@ -12,7 +13,7 @@ public class Main extends JFrame {
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
-        TableModel tableModel = new TableModel();
+        tableModel = new TableModel();
         JTable table = new JTable(tableModel);
         Controller co = new Controller(tableModel);
 
@@ -173,7 +174,7 @@ public class Main extends JFrame {
             return 0;
         }
 
-        // reports to the user that a student is not in the roster when adding their attendance
+        // adds missing student in roster to ms array list
         public void recordMissingStudents(AttendanceInfo info, ArrayList<AttendanceInfo> ms) {
             ms.add(info);
         }
@@ -185,26 +186,6 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        //Main daMain = new Main();
-        //daMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //daMain.setVisible(true);
-        //daMain.setSize(800, 600);
-
         Main daMain = new Main();
-
-
-
-        //This makes graph show up if you want to test
-        /*
-        SwingUtilities.invokeLater(() -> {
-            ScatterPlot example = new ScatterPlot("Scatter Chart Example");
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
-        */
-
-        //Table table = new Table();
     }
 }

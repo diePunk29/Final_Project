@@ -30,7 +30,6 @@ public class Controller implements ActionListener {
     private JFrame cal;
     private AttendanceInfo studentAttInfo;
     private DatePicker dp;
-    private String attendDate;
     private final String delimiter = ",";
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttendanceInfo> attendanceEntries;
@@ -306,10 +305,13 @@ public class Controller implements ActionListener {
                 }
             }
         } else if (e.getSource() == plotData) {
-            System.out.println("Plot");
-
-            ScatterPlot scatterPlot = new ScatterPlot("Attendance Chart");
-            JOptionPane.showMessageDialog(scatterPlot, "Attendance Chart");
+            SwingUtilities.invokeLater(() -> {
+                ScatterPlot example = new ScatterPlot("Scatter Chart Example", tableModel);
+                example.setSize(800, 400);
+                example.setLocationRelativeTo(null);
+                example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                example.setVisible(true);
+            });
         }
 
     }

@@ -11,16 +11,16 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class ScatterPlot extends JFrame {
 
-    final String TITLE = "Scatter Plot of Attendance";
+    final String TITLE = "Scatter Plot for Attendance";
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
 
-    public ScatterPlot(String title)
+    public ScatterPlot(String title, Main.TableModel tableModel)
     {
         super(title);
 
         //Create Data Table
-        XYDataset data = createDataset();
+        XYDataset data = createDataset(tableModel);
 
         //Create Chart
         JFreeChart scatterPlot = ChartFactory.createScatterPlot(TITLE,XAXISLABEL,YAXISLABEl,data);
@@ -38,7 +38,7 @@ public class ScatterPlot extends JFrame {
     So in here, we need it to pull data from the table. I think the best way is through
     a loop of sorts, using studentEntries and AttendanceInfo?
      */
-    private XYDataset createDataset()
+    private XYDataset createDataset(Main.TableModel tableModel)
     {
         XYSeriesCollection data = new XYSeriesCollection();
 
