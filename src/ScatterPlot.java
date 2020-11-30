@@ -58,33 +58,24 @@ public class ScatterPlot extends JFrame {
     private XYDataset createDataset(ArrayList<AttendanceInfo> info)
     {
         XYSeriesCollection data = new XYSeriesCollection();
+        ArrayList<String> keysUsed = new ArrayList<>();
         //Data
-        XYSeries points = new XYSeries("Attendance");
+        for(int i = 0; i < info.size(); i++) {
+            if(!keysUsed.contains(info.get(i).getDate())) {
+                keysUsed.add(info.get(i).getDate());
+                for(int j = 0; j < info.size(); j++) {
+                    XYSeries datePoints = new XYSeries(info.get(i).getDate());
+                    if(info.get(j).getDate().equals(info.get(i).getDate())) {
+                        //info.
+                        //int percentage = info.get(j).getTimeElapsed(;
+                        //datePoints.add(j+1);
+                    }
+                }
+            }
 
+        }
+        //XYSeries points = new XYSeries("Attendance");
 
-        /* Test Data
-        xAxisData.add(1, 72.9);
-        xAxisData.add(2, 81.6);
-        xAxisData.add(3, 88.9);
-        xAxisData.add(4, 96);
-        xAxisData.add(5, 102.1);
-        xAxisData.add(6, 108.5);
-        xAxisData.add(7, 113.9);
-        xAxisData.add(8, 119.3);
-        xAxisData.add(9, 123.8);
-        xAxisData.add(10, 124.4);
-         */
-
-        //Add Real Data
-        //*************
-
-
-
-
-
-        //*************
-
-        data.addSeries(points);
 
         return data;
     }
