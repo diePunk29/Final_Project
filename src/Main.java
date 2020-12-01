@@ -157,18 +157,11 @@ public class Main extends JFrame {
             return column.get(columnIndex);
         }
 
-        public ArrayList<AttendanceInfo> getScatterData() {
-            ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
-            for(int i = 0; i < rows.size(); i++) {
-                AttendanceInfo studAInfo = new AttendanceInfo();
-                studAInfo.setDate(columnNames[columnNames.length - 1]);
-                studAInfo.setTimeElapsed(getValueAt(i,rows.get(i).size() -1).toString());
-                studAInfo.setAsurite(getValueAt(i, 5).toString());
-                temp.add(studAInfo);
-            }
-            return temp;
-        }
-
+        /**
+         * This gets the values at a column starting at col index 6 up to col index n.
+         * @param colIndex the index of a given column.
+         * @return An arraylist of attendance information for a given column date.
+         */
         public ArrayList<AttendanceInfo> getScatterColumn(int colIndex) {
             ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
             for(int i = 0; i < rows.size(); i++) {
@@ -240,18 +233,6 @@ public class Main extends JFrame {
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, "" + newValue);
-
-//                    // data needed for scatter chart
-//                    for(int ix = 0; ix < scatterData.size() && !scatterHasDuplicate; ix++) {
-//                        if(scatterData.get(ix).getAsurite().equals(info.getAsurite())) {
-//                            scatterData.get(ix).setTimeElapsed(Integer.toString(newValue));
-//                            scatterHasDuplicate = true;
-//                        }
-//                    }
-//                    if(!scatterHasDuplicate) {
-//                        // do not add duplicates into scatter data
-//                        scatterData.add(info);
-//                    }
                     return dataLoadCount;
                 }
             }

@@ -126,7 +126,6 @@ public class Controller implements ActionListener {
                             while ((tempData = bufR.readLine()) != null) {
                                 dataColumns = tempData.split(delimiter);
                                 // setting up student info
-                                // we still need to add checks for data field type
                                 StudentInfo studentI = new StudentInfo();
                                 studentI.setStudentId(dataColumns[0]);
                                 studentI.setFirstName(dataColumns[1]);
@@ -334,8 +333,6 @@ public class Controller implements ActionListener {
                         example = new ScatterPlot("Scatter Chart Example",temp, inst);
                     }
 
-                    //ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
-                    //ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp, inst);
                     if (example != null) {
                         example.setSize(800, 400);
                         example.setLocationRelativeTo(null);
