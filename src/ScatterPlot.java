@@ -71,7 +71,6 @@ public class ScatterPlot extends JFrame {
             for(int indx = 0; indx < oldData.size(); indx++) {
                 data.addSeries(oldData.get(indx));
             }
-            System.out.println("hi");
         }
         for(int i = 0; i < info.size(); i++) {
             if(!keysUsed.contains(info.get(i).getDate())) {
@@ -92,6 +91,10 @@ public class ScatterPlot extends JFrame {
         return data;
     }
 
+    /**
+     * The purpose of getAllXYSeries is to obtain all previous scatter plot data!
+     * @return all xyseries that have been plotted.
+     */
     public ArrayList<XYSeries> getAllXYSeries() {
         return allData;
     }
