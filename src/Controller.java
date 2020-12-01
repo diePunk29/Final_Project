@@ -326,12 +326,23 @@ public class Controller implements ActionListener {
         } else if (e.getSource() == plotData) {
             if(hasLoadedRost && hasLoadedAttendance) {
                 SwingUtilities.invokeLater(() -> {
-                    ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
-                    ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp, inst);
-                    example.setSize(800, 400);
-                    example.setLocationRelativeTo(null);
-                    example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    example.setVisible(true);
+
+                    ArrayList<AttendanceInfo> temp;
+                    ScatterPlot example = null;
+                    for (int i = 6; i < tableModel.getColumnCount(); i++) {
+                        temp = tableModel.getScatterColumn(i);
+                        example = new ScatterPlot("Scatter Chart Example",temp, inst);
+                    }
+
+                    //ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
+                    //ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp, inst);
+                    if (example != null) {
+                        example.setSize(800, 400);
+                        example.setLocationRelativeTo(null);
+                        example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        example.setVisible(true);
+                    }
+
                 });
             }
             else {

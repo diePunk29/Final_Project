@@ -78,8 +78,10 @@ public class ScatterPlot extends JFrame {
             datePoints.add(percentage, i + 1);
         }
 
-        data.addSeries(datePoints);
-        oldData.add(datePoints);
+        if (!oldData.contains(datePoints)) {
+            data.addSeries(datePoints);
+            oldData.add(datePoints);
+        }
         return data;
     }
 

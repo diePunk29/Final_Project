@@ -169,6 +169,18 @@ public class Main extends JFrame {
             return temp;
         }
 
+        public ArrayList<AttendanceInfo> getScatterColumn(int colIndex) {
+            ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
+            for(int i = 0; i < rows.size(); i++) {
+                AttendanceInfo studAInfo = new AttendanceInfo();
+                studAInfo.setDate(columnNames[colIndex]);
+                studAInfo.setTimeElapsed(getValueAt(i,colIndex).toString());
+                studAInfo.setAsurite(getValueAt(i, 5).toString());
+                temp.add(studAInfo);
+            }
+            return temp;
+        }
+
         /**
          * This updates the table with the new row to be added.
          * @param row The row to be added.
