@@ -58,7 +58,7 @@ public class ScatterPlot extends JFrame {
      */
     private XYDataset createDataset(ArrayList<AttendanceInfo> info, ArrayList<XYSeries> oldData)
     {
-        double percentage = 0;
+        double percentage;
         XYSeriesCollection data = new XYSeriesCollection();
         ArrayList<String> keysUsed = new ArrayList<>();
         XYSeries datePoints;
@@ -88,10 +88,6 @@ public class ScatterPlot extends JFrame {
         return data;
     }
 
-    /**
-     * The purpose of getAllXYSeries is to obtain all previous scatter plot data!
-     * @return all xyseries that have been plotted.
-     */
 
 
 }
