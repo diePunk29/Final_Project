@@ -1,4 +1,5 @@
 /**
+ * Cristian Mosqueda, Eric Fahy, Albert Schaffer, Will Lord, and Tyler Vaillancourt
  * CSE360
  * Final Project
  * This class is the controller that deals
@@ -126,7 +127,6 @@ public class Controller implements ActionListener {
                             while ((tempData = bufR.readLine()) != null) {
                                 dataColumns = tempData.split(delimiter);
                                 // setting up student info
-                                // we still need to add checks for data field type
                                 StudentInfo studentI = new StudentInfo();
                                 studentI.setStudentId(dataColumns[0]);
                                 studentI.setFirstName(dataColumns[1]);
@@ -244,7 +244,6 @@ public class Controller implements ActionListener {
                     }
                 });
 
-
             }
             else {
                 JFrame ffj = new JFrame();
@@ -266,7 +265,6 @@ public class Controller implements ActionListener {
             if (selection == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
                 String filename = file.getName();
-                //String path = file.getParent();
 
                 try {
                     if (!file.exists()) {
@@ -334,8 +332,6 @@ public class Controller implements ActionListener {
                         example = new ScatterPlot("Scatter Chart Example",temp, inst);
                     }
 
-                    //ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
-                    //ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp, inst);
                     if (example != null) {
                         example.setSize(800, 400);
                         example.setLocationRelativeTo(null);
@@ -352,7 +348,6 @@ public class Controller implements ActionListener {
                         "PLOT.", "ERROR: ROSTER AND ATTENDANCE NOT LOADED", JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }
 
     /**

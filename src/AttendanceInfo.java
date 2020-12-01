@@ -1,4 +1,5 @@
 /**
+ * Cristian Mosqueda, Eric Fahy, Albert Schaffer, Will Lord, and Tyler Vaillancourt
  * CSE360
  * Final Project
  * This class is the base for storing all of

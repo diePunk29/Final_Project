@@ -1,4 +1,5 @@
 /**
+ * Cristian Mosqueda, Eric Fahy, Albert Schaffer, Will Lord, and Tyler Vaillancourt
  * CSE360
  * Final Project
  * This class is the scatter plot that shows
@@ -46,11 +47,6 @@ public class ScatterPlot extends JFrame {
         setContentPane(panel);
     }
 
-
-    /*
-    So in here, we need it to pull data from the table. I think the best way is through
-    a loop of sorts, using studentEntries and AttendanceInfo?
-     */
     /**
      * This pulls the data from the table in order to get it into the plot.
      * @param info is the student attendance info being used to populate the scatter chart
@@ -84,7 +80,4 @@ public class ScatterPlot extends JFrame {
         }
         return data;
     }
-
-
-
 }

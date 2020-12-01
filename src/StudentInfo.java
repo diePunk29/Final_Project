@@ -1,13 +1,12 @@
 /**
+ * Cristian Mosqueda, Eric Fahy, Albert Schaffer, Will Lord, and Tyler Vaillancourt
  * CSE360
  * Final Project
- * This class is for the student info in the class.
- * It has all of the necessary values for the table to function.
+ * class used for arrayList type
+ * the data fields in CSV file will be copied into an instance of StudentInfo
+ * and will be pushed in the ArrayList studentEntries
  */
 
-// class used for arrayList type
-// the data fields in CSV file will be copied into an instance of StudentInfo
-// and will be pushed in the ArrayList studentEntries
 public class StudentInfo {
     // fields
     private String studentId;
@@ -114,5 +113,4 @@ public class StudentInfo {
     public void setAsurite(String asurite) {
         this.asurite = asurite;
     }
-
 }

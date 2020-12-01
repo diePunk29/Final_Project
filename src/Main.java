@@ -1,4 +1,5 @@
 /**
+ * Cristian Mosqueda, Eric Fahy, Albert Schaffer, Will Lord, and Tyler Vaillancourt
  * CSE360
  * Final Project
  * This class is the main runner for this program.
@@ -9,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+
 public class Main extends JFrame {
     private TableModel tableModel;
     
@@ -16,8 +18,6 @@ public class Main extends JFrame {
      * This is the constructor for main. It creates the framework for the table.
      */
     public Main() {
-
-        // I think the main menu is suppose to be set up here idk tho
         JPanel panel = new JPanel();
         JMenuBar mainBar = new JMenuBar();
         setJMenuBar(mainBar);
@@ -45,7 +45,6 @@ public class Main extends JFrame {
 
         // Figure out how to set table minimum width (horizontal)
         table.setBounds(30, 40, 200, 300);
-        //table.setBounds(table.getBounds());
         JScrollPane scroll = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         //Add the menu bar and table to a panel
@@ -80,23 +79,8 @@ public class Main extends JFrame {
          */
         public TableModel() {
             rows = new ArrayList<ArrayList>();
-            // these were for testing
-            //makeDummyRows();
-            //makeDummyRows();
         }
-        
-        public void makeDummyRows() {
-            ArrayList<String> tempRow = new ArrayList<String>();
-            tempRow.add("bleh");
-            tempRow.add("Obama");
-            tempRow.add("Tyler Vanillacourt");
-            tempRow.add("killME.txt");
-            tempRow.add("mamba");
-            tempRow.add("NFDL");
-            rows.add(tempRow);
-        }
-        //So I'm unsure if I need more methods for the table, we might need
-        //one for grabbing the shit from the CSV or Repository class
+
         @Override
         /**
          * This gets the column at the indicated index.
@@ -156,19 +140,12 @@ public class Main extends JFrame {
             ArrayList column = rows.get(rowIndex);
             return column.get(columnIndex);
         }
-
-        public ArrayList<AttendanceInfo> getScatterData() {
-            ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
-            for(int i = 0; i < rows.size(); i++) {
-                AttendanceInfo studAInfo = new AttendanceInfo();
-                studAInfo.setDate(columnNames[columnNames.length - 1]);
-                studAInfo.setTimeElapsed(getValueAt(i,rows.get(i).size() -1).toString());
-                studAInfo.setAsurite(getValueAt(i, 5).toString());
-                temp.add(studAInfo);
-            }
-            return temp;
-        }
-
+        
+        /**
+         * This will return a column in the table based off of the given index.
+         * @param colIndex the index of the wanted column.
+         * @return the column based of the given index.
+         */
         public ArrayList<AttendanceInfo> getScatterColumn(int colIndex) {
             ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
             for(int i = 0; i < rows.size(); i++) {
@@ -240,18 +217,6 @@ public class Main extends JFrame {
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, "" + newValue);
-
-//                    // data needed for scatter chart
-//                    for(int ix = 0; ix < scatterData.size() && !scatterHasDuplicate; ix++) {
-//                        if(scatterData.get(ix).getAsurite().equals(info.getAsurite())) {
-//                            scatterData.get(ix).setTimeElapsed(Integer.toString(newValue));
-//                            scatterHasDuplicate = true;
-//                        }
-//                    }
-//                    if(!scatterHasDuplicate) {
-//                        // do not add duplicates into scatter data
-//                        scatterData.add(info);
-//                    }
                     return dataLoadCount;
                 }
             }
@@ -276,7 +241,6 @@ public class Main extends JFrame {
         public void removeRow(int row) {
             rows.remove(row);
         }
-
     }
 
     /**
@@ -286,6 +250,4 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         Main daMain = new Main();
     }
-
-
 }
