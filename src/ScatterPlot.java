@@ -22,8 +22,7 @@ public class ScatterPlot extends JFrame {
     final String TITLE = "Scatter Plot for Attendance";
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
-    private ArrayList<XYSeries> allData;
-    
+
     /**
      * This is the constructor for the scatter plot that initializes what it should look like.
      * @param title The title of the scatter plot.
@@ -31,9 +30,6 @@ public class ScatterPlot extends JFrame {
     public ScatterPlot(String title, ArrayList<AttendanceInfo> atInfo, ArrayList<XYSeries> oldData)
     {
         super(title);
-        // Array list for all scatter plot points!
-        allData = new ArrayList<>();
-
         //Create Data Table
         XYDataset data = createDataset(atInfo, oldData);
 
@@ -65,6 +61,7 @@ public class ScatterPlot extends JFrame {
         double percentage = 0;
         XYSeriesCollection data = new XYSeriesCollection();
         ArrayList<String> keysUsed = new ArrayList<>();
+        XYSeries datePoints;
 
         // reloading old scatter plot points before adding new series
         if(oldData != null && !oldData.isEmpty()) {
@@ -75,7 +72,7 @@ public class ScatterPlot extends JFrame {
         for(int i = 0; i < info.size(); i++) {
             if(!keysUsed.contains(info.get(i).getDate())) {
                 keysUsed.add(info.get(i).getDate());
-                XYSeries datePoints = new XYSeries(info.get(i).getDate());
+                datePoints = new XYSeries(info.get(i).getDate());
                 for(int j = 0; j < info.size(); j++) {
                     if (info.get(j).getDate().equals(info.get(i).getDate())) {
                         double time = Integer.parseInt(info.get(j).getTimeElapsed().replaceAll(" ", "").toString());
@@ -85,7 +82,7 @@ public class ScatterPlot extends JFrame {
                     }
                 }
                 data.addSeries(datePoints);
-                allData.add(datePoints);
+                oldData.add(datePoints);
             }
         }
         return data;
@@ -95,8 +92,6 @@ public class ScatterPlot extends JFrame {
      * The purpose of getAllXYSeries is to obtain all previous scatter plot data!
      * @return all xyseries that have been plotted.
      */
-    public ArrayList<XYSeries> getAllXYSeries() {
-        return allData;
-    }
+
 
 }

@@ -41,7 +41,7 @@ public class Controller implements ActionListener {
     protected ArrayList<StudentInfo> studentEntries;
     protected ArrayList<AttendanceInfo> attendanceEntries;
     protected ArrayList<AttendanceInfo> ms;
-    private ArrayList<XYSeries> inst;
+    private ArrayList<XYSeries> inst = new ArrayList<>();
 
     /**
      * This is the constructor for the Controller class.
@@ -328,7 +328,6 @@ public class Controller implements ActionListener {
                 SwingUtilities.invokeLater(() -> {
                     ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
                     ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp, inst);
-                    inst = example.getAllXYSeries();
                     example.setSize(800, 400);
                     example.setLocationRelativeTo(null);
                     example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
