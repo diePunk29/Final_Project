@@ -22,6 +22,7 @@ public class ScatterPlot extends JFrame {
     final String TITLE = "Scatter Plot for Attendance";
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
+    private ArrayList<XYSeries> allData;
     
     /**
      * This is the constructor for the scatter plot that initializes what it should look like.
@@ -30,6 +31,8 @@ public class ScatterPlot extends JFrame {
     public ScatterPlot(String title, ArrayList<AttendanceInfo> atInfo)
     {
         super(title);
+        // Array list for all scatter plot points!
+        allData = new ArrayList<>();
 
         //Create Data Table
         XYDataset data = createDataset(atInfo);
@@ -57,26 +60,32 @@ public class ScatterPlot extends JFrame {
      */
     private XYDataset createDataset(ArrayList<AttendanceInfo> info)
     {
+        double percentage = 0;
         XYSeriesCollection data = new XYSeriesCollection();
         ArrayList<String> keysUsed = new ArrayList<>();
-        //Data
+
+        // reloading old scatter plot points before adding new series
+        if(!allData.isEmpty()) {
+            for(int indx = 0; indx < allData.size(); indx++) {
+                data.addSeries(allData.get(indx));
+            }
+        }
         for(int i = 0; i < info.size(); i++) {
             if(!keysUsed.contains(info.get(i).getDate())) {
                 keysUsed.add(info.get(i).getDate());
+                XYSeries datePoints = new XYSeries(info.get(i).getDate());
                 for(int j = 0; j < info.size(); j++) {
-                    XYSeries datePoints = new XYSeries(info.get(i).getDate());
-                    if(info.get(j).getDate().equals(info.get(i).getDate())) {
-                        //info.
-                        //int percentage = info.get(j).getTimeElapsed(;
-                        //datePoints.add(j+1);
+                    if (info.get(j).getDate().equals(info.get(i).getDate())) {
+                        double time = Integer.parseInt(info.get(j).getTimeElapsed().replaceAll(" ", "").toString());
+                        if (time >= 75.0) percentage = 100.0;
+                        else percentage = (time / 75.0) * 100.0;
+                        datePoints.add(percentage, j + 1);
                     }
                 }
+                data.addSeries(datePoints);
+                allData.add(datePoints);
             }
-
         }
-        //XYSeries points = new XYSeries("Attendance");
-
-
         return data;
     }
 

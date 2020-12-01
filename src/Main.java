@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-
 public class Main extends JFrame {
     private TableModel tableModel;
     
@@ -74,14 +73,13 @@ public class Main extends JFrame {
         private String[] columnNames = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
         //ArrayList for storing entries in the table (can be changed if needed)
         private ArrayList<ArrayList> rows;
-        private ArrayList<AttendanceInfo> scatterData;
+        String currentDate = "";
 
         /**
          * This is the constructor for the Table. It initializes the rows of the table.
          */
         public TableModel() {
             rows = new ArrayList<ArrayList>();
-            scatterData = new ArrayList<>();
             // these were for testing
             //makeDummyRows();
             //makeDummyRows();
@@ -160,7 +158,15 @@ public class Main extends JFrame {
         }
 
         public ArrayList<AttendanceInfo> getScatterData() {
-            return scatterData;
+            ArrayList<AttendanceInfo> temp = new ArrayList<>(getRowCount());
+            for(int i = 0; i < rows.size(); i++) {
+                AttendanceInfo studAInfo = new AttendanceInfo();
+                studAInfo.setDate(columnNames[columnNames.length - 1]);
+                studAInfo.setTimeElapsed(getValueAt(i,rows.get(i).size() -1).toString());
+                studAInfo.setAsurite(getValueAt(i, 5).toString());
+                temp.add(studAInfo);
+            }
+            return temp;
         }
 
         /**
@@ -199,6 +205,7 @@ public class Main extends JFrame {
         public int updateWithAttendance(AttendanceInfo info, ArrayList<AttendanceInfo> ms) {
             int columnIndex = 0;
             int dataLoadCount = 0;
+            Boolean scatterHasDuplicate = false;
 
             // find the correct date column to be adding to
             for (int i = 0; i < columnNames.length; i++) {
@@ -215,12 +222,24 @@ public class Main extends JFrame {
 
                 // if the asurite in the table matches the incoming asurite, update the value
                 if (tableID.equals(info.getAsurite())) {
+                    // used in get scatter data
+                    currentDate = info.getDate();
                     dataLoadCount++;
                     int newValue = Integer.parseInt(rows.get(i).get(columnIndex).toString().replace(" ", ""));
                     newValue += Integer.parseInt(info.getTimeElapsed().replace(" ", ""));
                     rows.get(i).set(columnIndex, "" + newValue);
-                    // data needed for scatter chart
-                    scatterData.add(info);
+
+//                    // data needed for scatter chart
+//                    for(int ix = 0; ix < scatterData.size() && !scatterHasDuplicate; ix++) {
+//                        if(scatterData.get(ix).getAsurite().equals(info.getAsurite())) {
+//                            scatterData.get(ix).setTimeElapsed(Integer.toString(newValue));
+//                            scatterHasDuplicate = true;
+//                        }
+//                    }
+//                    if(!scatterHasDuplicate) {
+//                        // do not add duplicates into scatter data
+//                        scatterData.add(info);
+//                    }
                     return dataLoadCount;
                 }
             }
@@ -255,4 +274,6 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         Main daMain = new Main();
     }
+
+
 }

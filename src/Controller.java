@@ -325,7 +325,7 @@ public class Controller implements ActionListener {
             if(hasLoadedRost && hasLoadedAttendance) {
                 SwingUtilities.invokeLater(() -> {
                     ArrayList<AttendanceInfo> temp = tableModel.getScatterData();
-                    ScatterPlot example = new ScatterPlot("Scatter Chart Example", temp);
+                    ScatterPlot example = new ScatterPlot("Scatter Chart Example",temp);
                     example.setSize(800, 400);
                     example.setLocationRelativeTo(null);
                     example.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
