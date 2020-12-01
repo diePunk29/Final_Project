@@ -22,6 +22,7 @@ public class ScatterPlot extends JFrame {
     final String TITLE = "Scatter Plot for Attendance";
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
+    private ArrayList<String> keysUsed;
 
     /**
      * This is the constructor for the scatter plot that initializes what it should look like.
@@ -60,7 +61,7 @@ public class ScatterPlot extends JFrame {
     {
         double percentage;
         XYSeriesCollection data = new XYSeriesCollection();
-        ArrayList<String> keysUsed = new ArrayList<>();
+        keysUsed = new ArrayList<>();
         XYSeries datePoints;
 
         // reloading old scatter plot points before adding new series
@@ -69,22 +70,16 @@ public class ScatterPlot extends JFrame {
                 data.addSeries(oldData.get(indx));
             }
         }
+        datePoints = new XYSeries(info.get(0).getDate());
         for(int i = 0; i < info.size(); i++) {
-            if(!keysUsed.contains(info.get(i).getDate())) {
-                keysUsed.add(info.get(i).getDate());
-                datePoints = new XYSeries(info.get(i).getDate());
-                for(int j = 0; j < info.size(); j++) {
-                    if (info.get(j).getDate().equals(info.get(i).getDate())) {
-                        double time = Integer.parseInt(info.get(j).getTimeElapsed().replaceAll(" ", "").toString());
-                        if (time >= 75.0) percentage = 100.0;
-                        else percentage = (time / 75.0) * 100.0;
-                        datePoints.add(percentage, j + 1);
-                    }
-                }
-                data.addSeries(datePoints);
-                oldData.add(datePoints);
-            }
+            double time = Integer.parseInt(info.get(i).getTimeElapsed().replaceAll(" ", ""));
+            if (time >= 75.0) percentage = 100.0;
+            else percentage = (time / 75.0) * 100.0;
+            datePoints.add(percentage, i + 1);
         }
+
+        data.addSeries(datePoints);
+        oldData.add(datePoints);
         return data;
     }
 

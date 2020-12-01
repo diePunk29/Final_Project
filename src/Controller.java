@@ -357,7 +357,6 @@ public class Controller implements ActionListener {
                 return true;
             }
         }
-
         return false;
     }
 }
