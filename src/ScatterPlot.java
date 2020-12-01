@@ -23,7 +23,6 @@ public class ScatterPlot extends JFrame {
     final String TITLE = "Scatter Plot for Attendance";
     final String XAXISLABEL = "% of Attendance";
     final String YAXISLABEl = "Number of Students";
-    private ArrayList<String> keysUsed;
 
     /**
      * This is the constructor for the scatter plot that initializes what it should look like.
@@ -57,7 +56,6 @@ public class ScatterPlot extends JFrame {
     {
         double percentage;
         XYSeriesCollection data = new XYSeriesCollection();
-        keysUsed = new ArrayList<>();
         XYSeries datePoints;
 
         // reloading old scatter plot points before adding new series
