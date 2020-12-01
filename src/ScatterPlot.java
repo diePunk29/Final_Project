@@ -28,14 +28,14 @@ public class ScatterPlot extends JFrame {
      * This is the constructor for the scatter plot that initializes what it should look like.
      * @param title The title of the scatter plot.
      */
-    public ScatterPlot(String title, ArrayList<AttendanceInfo> atInfo)
+    public ScatterPlot(String title, ArrayList<AttendanceInfo> atInfo, ArrayList<XYSeries> oldData)
     {
         super(title);
         // Array list for all scatter plot points!
         allData = new ArrayList<>();
 
         //Create Data Table
-        XYDataset data = createDataset(atInfo);
+        XYDataset data = createDataset(atInfo, oldData);
 
         //Create Chart
         JFreeChart scatterPlot = ChartFactory.createScatterPlot(TITLE,XAXISLABEL,YAXISLABEl,data);
@@ -56,19 +56,22 @@ public class ScatterPlot extends JFrame {
      */
     /**
      * This pulls the data from the table in order to get it into the plot.
+     * @param info is the student attendance info being used to populate the scatter chart
+     * @param oldData
      * @return The dataset to be added to the plot.
      */
-    private XYDataset createDataset(ArrayList<AttendanceInfo> info)
+    private XYDataset createDataset(ArrayList<AttendanceInfo> info, ArrayList<XYSeries> oldData)
     {
         double percentage = 0;
         XYSeriesCollection data = new XYSeriesCollection();
         ArrayList<String> keysUsed = new ArrayList<>();
 
         // reloading old scatter plot points before adding new series
-        if(!allData.isEmpty()) {
-            for(int indx = 0; indx < allData.size(); indx++) {
-                data.addSeries(allData.get(indx));
+        if(oldData != null && !oldData.isEmpty()) {
+            for(int indx = 0; indx < oldData.size(); indx++) {
+                data.addSeries(oldData.get(indx));
             }
+            System.out.println("hi");
         }
         for(int i = 0; i < info.size(); i++) {
             if(!keysUsed.contains(info.get(i).getDate())) {
@@ -87,6 +90,10 @@ public class ScatterPlot extends JFrame {
             }
         }
         return data;
+    }
+
+    public ArrayList<XYSeries> getAllXYSeries() {
+        return allData;
     }
 
 }
